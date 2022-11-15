@@ -46,7 +46,7 @@ public class TipoDocumentoController implements Controller<TipoDocumentoDTO>{
 	@GetMapping("/tipodocumento/{id}")
 	public ResponseEntity<TipoDocumentoDTO> findOne(@PathVariable(value="id") Integer id) {
 		Optional<TipoDocumento> tipo = rep.findById(id);
-		TipoDocumento t = tipo.orElseThrow(()->new ResourceNotFoundException("Código inválido"));
+		TipoDocumento t = tipo.orElseThrow(()->new ResourceNotFoundException("O tipo de documento "+id+" não existe"));
 		return ResponseEntity.ok().body(t.toDTO());
 	}
 
