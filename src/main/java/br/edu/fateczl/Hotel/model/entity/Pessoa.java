@@ -1,10 +1,13 @@
 package br.edu.fateczl.Hotel.model.entity;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -18,13 +21,36 @@ import br.edu.fateczl.Hotel.model.dto.PessoaDTO;
 @Entity
 @Table(name = "tbPessoa")
 public class Pessoa {
-	@Id
-	@Column(name = "documento",length = 20,nullable = false)
-	private String documento;
-	@Id
-	@ManyToOne(targetEntity = TipoDocumento.class, fetch = FetchType.LAZY)
-	@JoinColumn(name = "tipoDocumento", nullable = false)
-	private TipoDocumento tipoDocumento;
+	@EmbeddedId
+	private PessoaID id;
+	
+	@Embeddable
+	public class PessoaID implements Serializable{
+		private static final long serialVersionUID = 1L;
+
+		@Column(name = "documento",length = 20,nullable = false)
+		private String documento;
+		
+		@ManyToOne(targetEntity = TipoDocumento.class, fetch = FetchType.LAZY)
+		@JoinColumn(name = "tipoDocumento", nullable = false)
+		private TipoDocumento tipoDocumento;
+
+		public String getDocumento() {
+			return documento;
+		}
+
+		public void setDocumento(String documento) {
+			this.documento = documento;
+		}
+
+		public TipoDocumento getTipoDocumento() {
+			return tipoDocumento;
+		}
+
+		public void setTipoDocumento(TipoDocumento tipoDocumento) {
+			this.tipoDocumento = tipoDocumento;
+		}
+	}
 	@Column(name = "nome",length = 80,nullable = false)
 	private String nome;
 	@Column(name = "email",length = 255,nullable = false)
@@ -34,18 +60,13 @@ public class Pessoa {
 	@Column(name = "telefone",length = 20,nullable = false)
 	private String telefone;
 	
-	public String getDocumento() {
-		return documento;
+	public PessoaID getId() {
+		return id;
 	}
-	public void setDocumento(String documento) {
-		this.documento = documento;
+	public void setId(PessoaID id) {
+		this.id = id;
 	}
-	public TipoDocumento getTipoDocumento() {
-		return tipoDocumento;
-	}
-	public void setTipoDocumento(TipoDocumento tipoDocumento) {
-		this.tipoDocumento = tipoDocumento;
-	}
+	
 	public String getNome() {
 		return nome;
 	}
@@ -73,11 +94,11 @@ public class Pessoa {
 	
 	public PessoaDTO toDTOPessoa() {
 		PessoaDTO dto = new PessoaDTO();
-		dto.setDocumento(this.getDocumento());
+		dto.setDocumento(id.getDocumento());
+		dto.setTipoDocumento(id.getTipoDocumento());
 		dto.setEmail(this.getEmail());
 		dto.setNome(this.getNome());
 		dto.setTelefone(this.getTelefone());
-		dto.setTipoDocumento(this.getTipoDocumento());
 		return dto;
 	}
 	
