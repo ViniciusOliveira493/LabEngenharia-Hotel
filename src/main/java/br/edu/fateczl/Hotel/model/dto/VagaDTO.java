@@ -3,6 +3,7 @@ package br.edu.fateczl.Hotel.model.dto;
 import br.edu.fateczl.Hotel.model.dto.interfaces.IDTO;
 import br.edu.fateczl.Hotel.model.entity.TipoVaga;
 import br.edu.fateczl.Hotel.model.entity.Vaga;
+import br.edu.fateczl.Hotel.model.entity.VagaId;
 
 public class VagaDTO implements IDTO<Vaga>{
 	private String estacionamento;
@@ -47,7 +48,14 @@ public class VagaDTO implements IDTO<Vaga>{
 	
 	@Override
 	public Vaga toEntity() {
-		// TODO Auto-generated method stub
-		return null;
+		Vaga v = new Vaga();
+		v.setDescricao(this.descricao);
+		VagaId vid = new VagaId();
+		vid.setEstacionamento(this.estacionamento);
+		vid.setNumVaga(this.numVaga);
+		v.setId(vid);
+		v.setTipo(this.tipo.toEntity());
+		v.setValorDiaria(this.valorDiaria);
+		return v;
 	}
 }

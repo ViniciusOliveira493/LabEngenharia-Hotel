@@ -1,13 +1,9 @@
 package br.edu.fateczl.Hotel.model.entity;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -17,31 +13,7 @@ import br.edu.fateczl.Hotel.model.entity.interfaces.IEntity;
 
 @Entity
 @Table(name = "tbVaga")
-public class Vaga implements IEntity<VagaDTO>{	
-	@Embeddable
-	public class VagaId implements Serializable{
-		private static final long serialVersionUID = 1L;
-
-		@Column(name = "estacionamento", length = 15, nullable = false)
-		private String estacionamento;
-		
-		@Column(name = "numVaga", nullable = false)
-		private int numVaga;
-		
-		public String getEstacionamento() {
-			return estacionamento;
-		}
-		public void setEstacionamento(String estacionamento) {
-			this.estacionamento = estacionamento;
-		}
-		public int getNumVaga() {
-			return numVaga;
-		}
-		public void setNumVaga(int numVaga) {
-			this.numVaga = numVaga;
-		}
-	}
-	
+public class Vaga implements IEntity<VagaDTO>{		
 	@EmbeddedId
 	private VagaId id;
 	
