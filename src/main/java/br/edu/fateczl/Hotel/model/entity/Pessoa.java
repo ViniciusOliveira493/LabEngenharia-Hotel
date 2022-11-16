@@ -2,10 +2,12 @@ package br.edu.fateczl.Hotel.model.entity;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
 
 import br.edu.fateczl.Hotel.model.dto.PessoaDTO;
@@ -13,6 +15,22 @@ import br.edu.fateczl.Hotel.model.entity.interfaces.IEntity;
 
 @Entity
 @Table(name = "tbPessoa")
+@NamedNativeQuery(
+		name = "Pessoa.fn_findAllFuncionarios"
+		,query = "  SELECT"
+					+ " p.documento"
+					+ " ,p.tipoDocumento"
+					+ " ,p.email"
+					+ " ,p.funcao"
+					+ " ,p.nome"
+					+ " ,p.senha"
+					+ " ,p.telefone"
+				+ " from "
+					+ " tbPessoa as p"
+				+ " WHERE"
+					+ "	funcao != 3"
+		,resultClass = Pessoa.class
+)
 public class Pessoa implements IEntity<PessoaDTO>{
 	public static final int ADMIN = 0;
 	public static final int GERENTE = 1;

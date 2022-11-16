@@ -33,10 +33,7 @@ public class FuncionarioController extends Controller<PessoaDTO>{
 	@Override
 	@GetMapping("/funcionario")
 	public List<PessoaDTO> findAll() {
-		// TODO Auto-generated method stub
-		// Criar native querie para buscar apenas funcionarios
-		// Deixando o find all de pessoas temporariamente
-		List<Pessoa> pessoas = rep.findAll();
+		List<Pessoa> pessoas = rep.fn_findAllFuncionarios();
 		List<PessoaDTO> pessoasDTO = new ArrayList<>();
 		
 		for(Pessoa p:pessoas) {
