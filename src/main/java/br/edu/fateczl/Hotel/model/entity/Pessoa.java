@@ -14,6 +14,10 @@ import br.edu.fateczl.Hotel.model.entity.interfaces.IEntity;
 @Entity
 @Table(name = "tbPessoa")
 public class Pessoa implements IEntity<PessoaDTO>{
+	public static final int ADMIN = 0;
+	public static final int GERENTE = 1;
+	public static final int ATENDENTE = 2;
+	public static final int CLIENTE = 3;
 	@EmbeddedId
 	private PessoaID id;
 	
@@ -25,7 +29,7 @@ public class Pessoa implements IEntity<PessoaDTO>{
 	private String senha;
 	@Column(name = "telefone",length = 20,nullable = false)
 	private String telefone;
-	//Função admin = 0 | Gerente = 1 | Atendente = 2 | Cliente = 3
+	
 	@Column(name = "funcao",nullable = false) 
 	private Integer funcao = 3;
 	
