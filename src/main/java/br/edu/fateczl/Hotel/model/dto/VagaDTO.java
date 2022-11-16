@@ -33,9 +33,7 @@ public class VagaDTO implements IDTO<Vaga>{
 	public TipoVagaDTO getTipo() {
 		return tipo;
 	}
-	public void setTipo(TipoVaga tipo) {
-		this.tipo = tipo.toDTO();
-	}
+	
 	public void setTipo(TipoVagaDTO tipo) {
 		this.tipo = tipo;
 	}

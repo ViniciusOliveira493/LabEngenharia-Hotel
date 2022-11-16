@@ -53,24 +53,24 @@ public class VagaController extends Controller<VagaDTO>{
 	}
 
 	@Override
-	@PostMapping("/vagas/")
+	@PostMapping("/vagas")
 	public ResponseEntity<String> insert(@Valid @RequestBody VagaDTO obj) {
 		rep.save(obj.toEntity());
 		return ResponseEntity.ok().body(sucesso(1));
 	}
 
 	@Override
-	@PutMapping("/vagas/")
+	@PutMapping("/vagas")
 	public ResponseEntity<String> update(@Valid @RequestBody VagaDTO obj) {
 		rep.save(obj.toEntity());
 		return ResponseEntity.ok().body(sucesso(2));
 	}
 
 	@Override
-	@DeleteMapping("/vagas/")
+	@DeleteMapping("/vagas")
 	public ResponseEntity<String> delete(@Valid @RequestBody VagaDTO obj) {
 		rep.delete(obj.toEntity());
-		return ResponseEntity.ok().body(sucesso(1));
+		return ResponseEntity.ok().body(sucesso(3));
 	}
 
 	@Override

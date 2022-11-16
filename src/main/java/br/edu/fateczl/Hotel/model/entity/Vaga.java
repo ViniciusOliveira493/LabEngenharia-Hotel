@@ -8,6 +8,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+import br.edu.fateczl.Hotel.model.dto.TipoVagaDTO;
 import br.edu.fateczl.Hotel.model.dto.VagaDTO;
 import br.edu.fateczl.Hotel.model.entity.interfaces.IEntity;
 
@@ -19,6 +23,7 @@ public class Vaga implements IEntity<VagaDTO>{
 	
 	@Column(name = "descricao", length = 255, nullable = true)
 	private String descricao;
+	
 	@ManyToOne(targetEntity = TipoVaga.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "tipo", nullable = false)
 	private TipoVaga tipo;
@@ -55,7 +60,7 @@ public class Vaga implements IEntity<VagaDTO>{
 		dto.setDescricao(this.descricao);
 		dto.setEstacionamento(this.id.getEstacionamento());
 		dto.setNumVaga(this.id.getNumVaga());
-		dto.setTipo(this.tipo);
+		dto.setTipo(this.tipo.toDTO());
 		dto.setValorDiaria(this.valorDiaria);
 		return dto;
 	}
