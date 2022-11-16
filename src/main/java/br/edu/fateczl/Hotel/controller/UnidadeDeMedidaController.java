@@ -19,52 +19,54 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.fateczl.Hotel.controller.interfaces.Controller;
-import br.edu.fateczl.Hotel.model.dto.TipoVagaDTO;
-import br.edu.fateczl.Hotel.model.entity.TipoVaga;
-import br.edu.fateczl.Hotel.repository.TipoVagaRepository;
+import br.edu.fateczl.Hotel.model.dto.UnidadeDeMedidaDTO;
+import br.edu.fateczl.Hotel.model.entity.UnidadeDeMedida;
+import br.edu.fateczl.Hotel.repository.UnidadeDeMedidaRepository;
 
 @RestController
 @RequestMapping("/api")
-public class TipoVagaController extends Controller<TipoVagaDTO>{
+public class UnidadeDeMedidaController extends Controller<UnidadeDeMedidaDTO>{
 	@Autowired
-	TipoVagaRepository rep;	
+	UnidadeDeMedidaRepository rep;
 	
 	@Override
-	@GetMapping("/tipovaga")
-	public List<TipoVagaDTO> findAll() {
-		List<TipoVaga> vagas = rep.findAll();
-		List<TipoVagaDTO> vagasDto = new ArrayList<>();
-		for(TipoVaga vaga:vagas) {
-			vagasDto.add(vaga.toDTO());
+	@GetMapping("/unidademedida")
+	public List<UnidadeDeMedidaDTO> findAll() {
+		List<UnidadeDeMedida> lista = rep.findAll();
+		List<UnidadeDeMedidaDTO> li = new ArrayList<>();
+		
+		for(UnidadeDeMedida med:lista) {
+			li.add(med.toDTO());
 		}
-		return vagasDto;
+		
+		return li;
 	}
 
 	@Override
-	@GetMapping("/tipovaga/{id}")
-	public ResponseEntity<TipoVagaDTO> findOne(@PathVariable(name = "id") Integer id) {		
-		Optional<TipoVaga> tipo = rep.findById(id);
-		TipoVaga t = tipo.orElseThrow(()-> new ResourceNotFoundException(this.notFound("um tipo de vaga",id)));
-		return ResponseEntity.ok().body(t.toDTO());
+	@GetMapping("/unidademedida/{id}")
+	public ResponseEntity<UnidadeDeMedidaDTO> findOne(@PathVariable(name="id") Integer id) {
+		Optional<UnidadeDeMedida> m = rep.findById(id);
+		UnidadeDeMedida uniMedida = m.orElseThrow(()-> new ResourceNotFoundException(this.notFound("uma unidade de medida",id)));
+		return ResponseEntity.ok().body(uniMedida.toDTO());
 	}
 
 	@Override
-	@PostMapping("/tipovaga")
-	public ResponseEntity<String> insert(@Valid @RequestBody TipoVagaDTO obj) {
+	@PostMapping("/unidademedida/")
+	public ResponseEntity<String> insert(@Valid @RequestBody UnidadeDeMedidaDTO obj) {
 		rep.save(obj.toEntity());
 		return ResponseEntity.ok().body(this.sucesso(1));
 	}
 
 	@Override
-	@PutMapping("/tipovaga")
-	public ResponseEntity<String> update(@Valid @RequestBody TipoVagaDTO obj) {
+	@PutMapping("/unidademedida/")
+	public ResponseEntity<String> update(@Valid @RequestBody UnidadeDeMedidaDTO obj) {
 		rep.save(obj.toEntity());
 		return ResponseEntity.ok().body(this.sucesso(2));
 	}
 
 	@Override
-	@DeleteMapping("/tipovaga")
-	public ResponseEntity<String> delete(@Valid @RequestBody TipoVagaDTO obj) {
+	@DeleteMapping("/unidademedida/")
+	public ResponseEntity<String> delete(UnidadeDeMedidaDTO obj) {
 		rep.delete(obj.toEntity());
 		return ResponseEntity.ok().body(this.sucesso(3));
 	}

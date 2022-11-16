@@ -1,8 +1,10 @@
 package br.edu.fateczl.Hotel.model.dto;
 
+import br.edu.fateczl.Hotel.model.dto.interfaces.IDTO;
+import br.edu.fateczl.Hotel.model.entity.Pessoa;
 import br.edu.fateczl.Hotel.model.entity.TipoDocumento;
 
-public class PessoaDTO {
+public class PessoaDTO implements IDTO<Pessoa>{
 	private String documento;
 	private TipoDocumentoDTO tipoDocumento;
 	private String nome;
@@ -41,5 +43,10 @@ public class PessoaDTO {
 	}
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
+	}
+	@Override
+	public Pessoa toEntity() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

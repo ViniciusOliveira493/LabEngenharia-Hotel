@@ -1,8 +1,9 @@
 package br.edu.fateczl.Hotel.model.dto;
 
+import br.edu.fateczl.Hotel.model.dto.interfaces.IDTO;
 import br.edu.fateczl.Hotel.model.entity.TipoVaga;
 
-public class TipoVagaDTO {
+public class TipoVagaDTO implements IDTO<TipoVaga>{
 	private int id;
 	private String tipo;
 

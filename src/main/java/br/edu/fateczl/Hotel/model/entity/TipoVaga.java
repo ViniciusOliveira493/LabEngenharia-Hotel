@@ -8,10 +8,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import br.edu.fateczl.Hotel.model.dto.TipoVagaDTO;
+import br.edu.fateczl.Hotel.model.entity.interfaces.IEntity;
 
 @Entity
 @Table(name = "tbTipoVaga")
-public class TipoVaga {
+public class TipoVaga implements IEntity<TipoVagaDTO>{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false)

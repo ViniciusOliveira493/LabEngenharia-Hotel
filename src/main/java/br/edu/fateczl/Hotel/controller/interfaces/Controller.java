@@ -1,13 +1,19 @@
 package br.edu.fateczl.Hotel.controller.interfaces;
 
-import java.util.List;
-
-import org.springframework.http.ResponseEntity;
-
-public interface Controller<T> {
-	public List<T> findAll();
-	public ResponseEntity<T> findOne(Integer a);
-	public ResponseEntity<String> insert(T obj);
-	public ResponseEntity<String> update(T obj);
-	public ResponseEntity<String> delete(T obj);	
+public abstract class Controller<T> implements IController<T>{
+	protected String notFound(String nome,int id) {
+		return "Não existe "+nome+" com id = "+id;
+	}
+	
+	protected String sucesso(int acao) {
+		switch (acao) {
+		case 1:
+			return "Dados cadastrados com sucesso";
+		case 2:
+			return "Dados atualizados com sucesso";
+		case 3:
+			return "Dados apagados com sucesso";
+		}
+		return "Erro ao buscar mensagem de sucesso";
+	}
 }

@@ -13,10 +13,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import br.edu.fateczl.Hotel.model.dto.VagaDTO;
+import br.edu.fateczl.Hotel.model.entity.interfaces.IEntity;
 
 @Entity
 @Table(name = "tbVaga")
-public class Vaga {	
+public class Vaga implements IEntity<VagaDTO>{	
 	@Embeddable
 	public class VagaId implements Serializable{
 		private static final long serialVersionUID = 1L;

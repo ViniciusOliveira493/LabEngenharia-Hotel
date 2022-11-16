@@ -1,8 +1,10 @@
 package br.edu.fateczl.Hotel.model.dto;
 
+import br.edu.fateczl.Hotel.model.dto.interfaces.IDTO;
 import br.edu.fateczl.Hotel.model.entity.TipoVaga;
+import br.edu.fateczl.Hotel.model.entity.Vaga;
 
-public class VagaDTO {
+public class VagaDTO implements IDTO<Vaga>{
 	private String estacionamento;
 	private int numVaga;
 	private String descricao;
@@ -41,5 +43,11 @@ public class VagaDTO {
 	}
 	public void setValorDiaria(double valorDiaria) {
 		this.valorDiaria = valorDiaria;
+	}
+	
+	@Override
+	public Vaga toEntity() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

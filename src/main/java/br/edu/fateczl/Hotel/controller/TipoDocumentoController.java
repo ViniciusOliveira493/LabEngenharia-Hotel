@@ -25,7 +25,7 @@ import br.edu.fateczl.Hotel.repository.TipoDocumentoRepository;
 
 @RestController
 @RequestMapping("/api")
-public class TipoDocumentoController implements Controller<TipoDocumentoDTO>{
+public class TipoDocumentoController extends Controller<TipoDocumentoDTO>{
 	@Autowired
 	TipoDocumentoRepository rep;
 
@@ -46,35 +46,29 @@ public class TipoDocumentoController implements Controller<TipoDocumentoDTO>{
 	@GetMapping("/tipodocumento/{id}")
 	public ResponseEntity<TipoDocumentoDTO> findOne(@PathVariable(value="id") Integer id) {
 		Optional<TipoDocumento> tipo = rep.findById(id);
-		TipoDocumento t = tipo.orElseThrow(()->new ResourceNotFoundException("O tipo de documento "+id+" não existe"));
+		TipoDocumento t = tipo.orElseThrow(()->new ResourceNotFoundException(this.notFound("um tipo de documento",id)));
 		return ResponseEntity.ok().body(t.toDTO());
 	}
 
 	@Override
 	@PostMapping("/tipodocumento/")
 	public ResponseEntity<String> insert(@Valid @RequestBody TipoDocumentoDTO obj) {
-		TipoDocumento tipo = obj.toEntity();
-		rep.save(tipo);
-		String saida = "Dados cadastrados com sucesso";
-		return ResponseEntity.ok().body(saida);
+		rep.save(obj.toEntity());
+		return ResponseEntity.ok().body(this.sucesso(1));
 	}
 
 	@Override
 	@PutMapping("/tipodocumento/")
 	public ResponseEntity<String> update(@Valid @RequestBody TipoDocumentoDTO obj) {
-		TipoDocumento tipo = obj.toEntity();
-		rep.save(tipo);
-		String saida = "Dados atualizados com sucesso";
-		return ResponseEntity.ok().body(saida);
+		rep.save(obj.toEntity());
+		return ResponseEntity.ok().body(this.sucesso(2));
 	}
 
 	@Override
 	@DeleteMapping("/tipodocumento/")
 	public ResponseEntity<String> delete(@Valid @RequestBody TipoDocumentoDTO obj) {
-		TipoDocumento tipo = obj.toEntity();
-		rep.delete(tipo);
-		String saida = "Dados apagados com sucesso";
-		return ResponseEntity.ok().body(saida);
+		rep.delete(obj.toEntity());
+		return ResponseEntity.ok().body(this.sucesso(3));
 	}
 	
 	

@@ -6,6 +6,7 @@ import javax.persistence.Table;
 
 import br.edu.fateczl.Hotel.model.dto.FuncionarioDTO;
 import br.edu.fateczl.Hotel.model.dto.PessoaDTO;
+import br.edu.fateczl.Hotel.model.entity.interfaces.IEntity;
 
 @Entity
 @Table(name = "tbFuncionario")
@@ -23,7 +24,7 @@ public class Funcionario extends Pessoa{
 	}
 	
 	public FuncionarioDTO toDTOFuncionario() {
-		PessoaDTO pDto = this.toDTOPessoa(); 
+		PessoaDTO pDto = this.toDTO(); 
 		FuncionarioDTO dto = new FuncionarioDTO();
 		dto.setDocumento(pDto.getDocumento());
 		dto.setEmail(pDto.getEmail());

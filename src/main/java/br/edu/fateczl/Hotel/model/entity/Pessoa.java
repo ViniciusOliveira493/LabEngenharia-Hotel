@@ -17,10 +17,11 @@ import javax.persistence.Table;
 
 import br.edu.fateczl.Hotel.model.dto.FuncionarioDTO;
 import br.edu.fateczl.Hotel.model.dto.PessoaDTO;
+import br.edu.fateczl.Hotel.model.entity.interfaces.IEntity;
 
 @Entity
 @Table(name = "tbPessoa")
-public class Pessoa {
+public class Pessoa implements IEntity<PessoaDTO>{
 	@EmbeddedId
 	private PessoaID id;
 	
@@ -92,16 +93,6 @@ public class Pessoa {
 		this.telefone = telefone;
 	}
 	
-	public PessoaDTO toDTOPessoa() {
-		PessoaDTO dto = new PessoaDTO();
-		dto.setDocumento(id.getDocumento());
-		dto.setTipoDocumento(id.getTipoDocumento());
-		dto.setEmail(this.getEmail());
-		dto.setNome(this.getNome());
-		dto.setTelefone(this.getTelefone());
-		return dto;
-	}
-	
 	public static String MD5(String txt) {
 		MessageDigest md = null;
 		try {
@@ -112,5 +103,16 @@ public class Pessoa {
 			e.printStackTrace();
 		}
 		return "ERROR_90_43_21";
+	}
+	
+	@Override
+	public PessoaDTO toDTO() {
+		PessoaDTO dto = new PessoaDTO();
+		dto.setDocumento(id.getDocumento());
+		dto.setTipoDocumento(id.getTipoDocumento());
+		dto.setEmail(this.getEmail());
+		dto.setNome(this.getNome());
+		dto.setTelefone(this.getTelefone());
+		return dto;
 	}
 }
