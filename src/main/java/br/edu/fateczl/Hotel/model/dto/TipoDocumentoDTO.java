@@ -1,9 +1,12 @@
 package br.edu.fateczl.Hotel.model.dto;
 
+import java.io.Serializable;
+
 import br.edu.fateczl.Hotel.model.dto.interfaces.IDTO;
 import br.edu.fateczl.Hotel.model.entity.TipoDocumento;
 
-public class TipoDocumentoDTO implements IDTO<TipoDocumento>{
+public class TipoDocumentoDTO implements IDTO<TipoDocumento>,Serializable{
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private String tipo;
 	

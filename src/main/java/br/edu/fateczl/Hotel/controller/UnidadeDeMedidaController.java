@@ -46,7 +46,7 @@ public class UnidadeDeMedidaController extends Controller<UnidadeDeMedidaDTO>{
 	@GetMapping("/unidademedida/{id}")
 	public ResponseEntity<UnidadeDeMedidaDTO> findOne(@PathVariable(name="id") Integer id) {
 		Optional<UnidadeDeMedida> m = rep.findById(id);
-		UnidadeDeMedida uniMedida = m.orElseThrow(()-> new ResourceNotFoundException(this.notFound("uma unidade de medida",id)));
+		UnidadeDeMedida uniMedida = m.orElseThrow(()-> new ResourceNotFoundException(this.notFound("uma unidade de medida",id+"")));
 		return ResponseEntity.ok().body(uniMedida.toDTO());
 	}
 

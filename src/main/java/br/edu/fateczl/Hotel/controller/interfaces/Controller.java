@@ -1,7 +1,7 @@
 package br.edu.fateczl.Hotel.controller.interfaces;
 
 public abstract class Controller<T> implements IController<T>{
-	protected String notFound(String nome,int id) {
+	protected String notFound(String nome,String id) {
 		return "Não existe "+nome+" com id = "+id;
 	}
 	

@@ -1,21 +1,13 @@
 package br.edu.fateczl.Hotel.model.entity;
 
-import java.io.Serializable;
-import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import br.edu.fateczl.Hotel.model.dto.FuncionarioDTO;
 import br.edu.fateczl.Hotel.model.dto.PessoaDTO;
 import br.edu.fateczl.Hotel.model.entity.interfaces.IEntity;
 
@@ -25,33 +17,6 @@ public class Pessoa implements IEntity<PessoaDTO>{
 	@EmbeddedId
 	private PessoaID id;
 	
-	@Embeddable
-	public class PessoaID implements Serializable{
-		private static final long serialVersionUID = 1L;
-
-		@Column(name = "documento",length = 20,nullable = false)
-		private String documento;
-		
-		@ManyToOne(targetEntity = TipoDocumento.class, fetch = FetchType.LAZY)
-		@JoinColumn(name = "tipoDocumento", nullable = false)
-		private TipoDocumento tipoDocumento;
-
-		public String getDocumento() {
-			return documento;
-		}
-
-		public void setDocumento(String documento) {
-			this.documento = documento;
-		}
-
-		public TipoDocumento getTipoDocumento() {
-			return tipoDocumento;
-		}
-
-		public void setTipoDocumento(TipoDocumento tipoDocumento) {
-			this.tipoDocumento = tipoDocumento;
-		}
-	}
 	@Column(name = "nome",length = 80,nullable = false)
 	private String nome;
 	@Column(name = "email",length = 255,nullable = false)
@@ -60,6 +25,9 @@ public class Pessoa implements IEntity<PessoaDTO>{
 	private String senha;
 	@Column(name = "telefone",length = 20,nullable = false)
 	private String telefone;
+	//Função admin = 0 | Gerente = 1 | Atendente = 2 | Cliente = 3
+	@Column(name = "funcao",nullable = false) 
+	private Integer funcao = 3;
 	
 	public PessoaID getId() {
 		return id;
@@ -92,27 +60,45 @@ public class Pessoa implements IEntity<PessoaDTO>{
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
+	public int getFuncao() {
+		return funcao;
+	}
+	public void setFuncao(int funcao) {
+		this.funcao = funcao;
+	}
 	
 	public static String MD5(String txt) {
-		MessageDigest md = null;
+		
 		try {
-			md = MessageDigest.getInstance("MD5");
-			BigInteger hash = new BigInteger(1,md.digest(txt.getBytes()));
-			return hash.toString();
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			return new String(hexCodes(md.digest(txt.getBytes())));
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
+		
 		return "ERROR_90_43_21";
 	}
+	
+	private static char[] hexCodes(byte[] text) {
+        char[] hexOutput = new char[text.length * 2];
+        String hexString;
+
+        for (int i = 0; i < text.length; i++) {
+            hexString = "00" + Integer.toHexString(text[i]);
+            hexString.toUpperCase().getChars(hexString.length() - 2,
+                                    hexString.length(), hexOutput, i * 2);
+        }
+        return hexOutput;
+}
 	
 	@Override
 	public PessoaDTO toDTO() {
 		PessoaDTO dto = new PessoaDTO();
-		dto.setDocumento(id.getDocumento());
-		dto.setTipoDocumento(id.getTipoDocumento());
+		dto.setId(this.id);
 		dto.setEmail(this.getEmail());
 		dto.setNome(this.getNome());
 		dto.setTelefone(this.getTelefone());
+		dto.setFuncao(this.funcao);
 		return dto;
 	}
 }

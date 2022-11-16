@@ -44,7 +44,7 @@ public class TipoVagaController extends Controller<TipoVagaDTO>{
 	@GetMapping("/tipovaga/{id}")
 	public ResponseEntity<TipoVagaDTO> findOne(@PathVariable(name = "id") Integer id) {		
 		Optional<TipoVaga> tipo = rep.findById(id);
-		TipoVaga t = tipo.orElseThrow(()-> new ResourceNotFoundException(this.notFound("um tipo de vaga",id)));
+		TipoVaga t = tipo.orElseThrow(()-> new ResourceNotFoundException(this.notFound("um tipo de vaga",id+"")));
 		return ResponseEntity.ok().body(t.toDTO());
 	}
 

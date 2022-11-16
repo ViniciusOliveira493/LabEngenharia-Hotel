@@ -48,7 +48,7 @@ public class VagaController extends Controller<VagaDTO>{
 		id.setEstacionamento(a);
 		id.setNumVaga(e);
 		Optional<Vaga> vaga = rep.findById(id);
-		Vaga v = vaga.orElseThrow(()-> new ResourceNotFoundException(notFound("uma vaga no estacionamento "+a, e)));
+		Vaga v = vaga.orElseThrow(()-> new ResourceNotFoundException(notFound("uma vaga no estacionamento "+a, e+"")));
 		return ResponseEntity.ok().body(v.toDTO());
 	}
 
