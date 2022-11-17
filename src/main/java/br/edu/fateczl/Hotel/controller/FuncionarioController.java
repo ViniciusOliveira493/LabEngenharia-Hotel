@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -58,7 +59,7 @@ public class FuncionarioController extends Controller<PessoaDTO>{
 
 	@Override
 	@PostMapping("/funcionario")
-	public ResponseEntity<String> insert(@Valid PessoaDTO obj) {
+	public ResponseEntity<String> insert(@Valid @RequestBody PessoaDTO obj) {
 		Optional<Pessoa> p = rep.findById(obj.getId());
 		if(p.isEmpty()) {
 			rep.save(obj.toEntity());
@@ -71,14 +72,14 @@ public class FuncionarioController extends Controller<PessoaDTO>{
 
 	@Override
 	@PutMapping("/funcionario")
-	public ResponseEntity<String> update(PessoaDTO obj) {
+	public ResponseEntity<String> update(@Valid @RequestBody PessoaDTO obj) {
 		rep.save(obj.toEntity());
 		return ResponseEntity.ok().body(this.sucesso(2));
 	}
 
 	@Override
 	@DeleteMapping("/funcionario")
-	public ResponseEntity<String> delete(PessoaDTO obj) {
+	public ResponseEntity<String> delete(@Valid @RequestBody PessoaDTO obj) {
 		obj.setFuncao(Pessoa.CLIENTE);
 		rep.save(obj.toEntity());
 		return ResponseEntity.ok().body(this.sucesso(3));

@@ -31,6 +31,22 @@ import br.edu.fateczl.Hotel.model.entity.interfaces.IEntity;
 					+ "	funcao != 3"
 		,resultClass = Pessoa.class
 )
+@NamedNativeQuery(
+		name = "Pessoa.fn_login"
+		,query = "  SELECT"
+					+ " p.documento"
+					+ " ,p.tipoDocumento"
+					+ " ,p.email"
+					+ " ,p.funcao"
+					+ " ,p.nome"
+					+ " ,p.senha"
+					+ " ,p.telefone"
+				+ " from "
+					+ " tbPessoa as p"
+				+ " WHERE"
+					+ "	p.email = ?1 AND p.senha = ?2"
+		,resultClass = Pessoa.class
+)
 public class Pessoa implements IEntity<PessoaDTO>{
 	public static final int ADMIN = 0;
 	public static final int GERENTE = 1;

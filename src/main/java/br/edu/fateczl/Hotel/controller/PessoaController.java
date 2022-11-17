@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -59,21 +60,30 @@ public class PessoaController extends Controller<PessoaDTO>{
 
 	@Override
 	@PostMapping("/pessoa")
-	public ResponseEntity<String> insert(@Valid PessoaDTO obj) {
+	public ResponseEntity<String> insert(@Valid @RequestBody PessoaDTO obj) {
 		rep.save(obj.toEntity());
 		return ResponseEntity.ok().body(this.sucesso(1));
 	}
 
+	@PostMapping("/login")
+	public ResponseEntity<PessoaDTO> login(@Valid @RequestBody PessoaDTO obj) {
+		Pessoa p = rep.fn_login(obj.getEmail(), Pessoa.MD5(obj.getSenha()));
+		if(p != null) {
+			return ResponseEntity.ok().body(p.toDTO());
+		}
+		return ResponseEntity.ok().body(null);
+	}
+	
 	@Override
 	@PutMapping("/pessoa")
-	public ResponseEntity<String> update(@Valid PessoaDTO obj) {
+	public ResponseEntity<String> update(@Valid @RequestBody PessoaDTO obj) {
 		rep.save(obj.toEntity());
 		return ResponseEntity.ok().body(this.sucesso(2));
 	}
 
 	@Override
 	@DeleteMapping("/pessoa")
-	public ResponseEntity<String> delete(@Valid PessoaDTO obj) {
+	public ResponseEntity<String> delete(@Valid @RequestBody PessoaDTO obj) {
 		rep.delete(obj.toEntity());
 		return ResponseEntity.ok().body(this.sucesso(3));
 	}

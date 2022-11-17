@@ -10,4 +10,5 @@ import br.edu.fateczl.Hotel.model.entity.PessoaID;
 public interface PessoaRepository extends JpaRepository<Pessoa, PessoaID>{
 	Pessoa findByIdDocumento(String documento);
 	List<Pessoa> fn_findAllFuncionarios();
+	Pessoa fn_login(String email,String senha);
 }
