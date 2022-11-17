@@ -1,28 +1,30 @@
 package br.edu.fateczl.Hotel.model.dto;
 
+import br.edu.fateczl.Hotel.model.dto.interfaces.IDTO;
+import br.edu.fateczl.Hotel.model.entity.Pessoa;
+import br.edu.fateczl.Hotel.model.entity.PessoaID;
 import br.edu.fateczl.Hotel.model.entity.TipoDocumento;
 
-public class PessoaDTO {
-	private String documento;
-	private TipoDocumentoDTO tipoDocumento;
+public class PessoaDTO implements IDTO<Pessoa>{
+	private PessoaID id;
 	private String nome;
+	private String senha;
 	private String email;
 	private String telefone;
+	private Integer funcao = 3;
 	
-	public String getDocumento() {
-		return documento;
+	public String getSenha() {
+		return senha;
 	}
-	public void setDocumento(String documento) {
-		this.documento = documento;
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
-	public TipoDocumentoDTO getTipoDocumento() {
-		return tipoDocumento;
+	
+	public PessoaID getId() {
+		return id;
 	}
-	public void setTipoDocumento(TipoDocumento tipoDocumento) {
-		this.tipoDocumento = tipoDocumento.toDTO();
-	}
-	public void setTipoDocumento(TipoDocumentoDTO tipoDocumento) {
-		this.tipoDocumento = tipoDocumento;
+	public void setId(PessoaID id) {
+		this.id = id;
 	}
 	public String getNome() {
 		return nome;
@@ -41,5 +43,24 @@ public class PessoaDTO {
 	}
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
+	}
+	
+	public int getFuncao() {
+		return funcao;
+	}
+	public void setFuncao(int funcao) {
+		this.funcao = funcao;
+	}
+	@Override
+	public Pessoa toEntity() {
+		Pessoa p = new Pessoa();
+		p.setEmail(this.email);
+		p.setId(this.id);
+		p.setNome(this.nome);
+		p.setSenha(this.senha);
+		p.setFuncao(this.funcao);
+		System.out.println(p.getSenha());
+		p.setTelefone(this.telefone);
+		return p;
 	}
 }

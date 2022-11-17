@@ -1,30 +1,60 @@
 package br.edu.fateczl.Hotel.model.entity;
 
-import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
 
-import br.edu.fateczl.Hotel.model.dto.FuncionarioDTO;
 import br.edu.fateczl.Hotel.model.dto.PessoaDTO;
+import br.edu.fateczl.Hotel.model.entity.interfaces.IEntity;
 
 @Entity
 @Table(name = "tbPessoa")
-public class Pessoa {
-	@Id
-	@Column(name = "documento",length = 20,nullable = false)
-	private String documento;
-	@Id
-	@ManyToOne(targetEntity = TipoDocumento.class, fetch = FetchType.LAZY)
-	@JoinColumn(name = "tipoDocumento", nullable = false)
-	private TipoDocumento tipoDocumento;
+@NamedNativeQuery(
+		name = "Pessoa.fn_findAllFuncionarios"
+		,query = "  SELECT"
+					+ " p.documento"
+					+ " ,p.tipoDocumento"
+					+ " ,p.email"
+					+ " ,p.funcao"
+					+ " ,p.nome"
+					+ " ,p.senha"
+					+ " ,p.telefone"
+				+ " from "
+					+ " tbPessoa as p"
+				+ " WHERE"
+					+ "	funcao != 3"
+		,resultClass = Pessoa.class
+)
+@NamedNativeQuery(
+		name = "Pessoa.fn_login"
+		,query = "  SELECT"
+					+ " p.documento"
+					+ " ,p.tipoDocumento"
+					+ " ,p.email"
+					+ " ,p.funcao"
+					+ " ,p.nome"
+					+ " ,p.senha"
+					+ " ,p.telefone"
+				+ " from "
+					+ " tbPessoa as p"
+				+ " WHERE"
+					+ "	p.email = ?1 AND p.senha = ?2"
+		,resultClass = Pessoa.class
+)
+public class Pessoa implements IEntity<PessoaDTO>{
+	public static final int ADMIN = 0;
+	public static final int GERENTE = 1;
+	public static final int ATENDENTE = 2;
+	public static final int CLIENTE = 3;
+	@EmbeddedId
+	private PessoaID id;
+	
 	@Column(name = "nome",length = 80,nullable = false)
 	private String nome;
 	@Column(name = "email",length = 255,nullable = false)
@@ -34,18 +64,16 @@ public class Pessoa {
 	@Column(name = "telefone",length = 20,nullable = false)
 	private String telefone;
 	
-	public String getDocumento() {
-		return documento;
+	@Column(name = "funcao",nullable = false) 
+	private Integer funcao = 3;
+	
+	public PessoaID getId() {
+		return id;
 	}
-	public void setDocumento(String documento) {
-		this.documento = documento;
+	public void setId(PessoaID id) {
+		this.id = id;
 	}
-	public TipoDocumento getTipoDocumento() {
-		return tipoDocumento;
-	}
-	public void setTipoDocumento(TipoDocumento tipoDocumento) {
-		this.tipoDocumento = tipoDocumento;
-	}
+	
 	public String getNome() {
 		return nome;
 	}
@@ -70,26 +98,45 @@ public class Pessoa {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-	
-	public PessoaDTO toDTOPessoa() {
-		PessoaDTO dto = new PessoaDTO();
-		dto.setDocumento(this.getDocumento());
-		dto.setEmail(this.getEmail());
-		dto.setNome(this.getNome());
-		dto.setTelefone(this.getTelefone());
-		dto.setTipoDocumento(this.getTipoDocumento());
-		return dto;
+	public int getFuncao() {
+		return funcao;
+	}
+	public void setFuncao(int funcao) {
+		this.funcao = funcao;
 	}
 	
 	public static String MD5(String txt) {
-		MessageDigest md = null;
+		
 		try {
-			md = MessageDigest.getInstance("MD5");
-			BigInteger hash = new BigInteger(1,md.digest(txt.getBytes()));
-			return hash.toString();
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			return new String(hexCodes(md.digest(txt.getBytes())));
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
+		
 		return "ERROR_90_43_21";
+	}
+	
+	private static char[] hexCodes(byte[] text) {
+        char[] hexOutput = new char[text.length * 2];
+        String hexString;
+
+        for (int i = 0; i < text.length; i++) {
+            hexString = "00" + Integer.toHexString(text[i]);
+            hexString.toUpperCase().getChars(hexString.length() - 2,
+                                    hexString.length(), hexOutput, i * 2);
+        }
+        return hexOutput;
+}
+	
+	@Override
+	public PessoaDTO toDTO() {
+		PessoaDTO dto = new PessoaDTO();
+		dto.setId(this.id);
+		dto.setEmail(this.getEmail());
+		dto.setNome(this.getNome());
+		dto.setTelefone(this.getTelefone());
+		dto.setFuncao(this.funcao);
+		return dto;
 	}
 }

@@ -1,8 +1,11 @@
 package br.edu.fateczl.Hotel.model.dto;
 
+import br.edu.fateczl.Hotel.model.dto.interfaces.IDTO;
 import br.edu.fateczl.Hotel.model.entity.TipoVaga;
+import br.edu.fateczl.Hotel.model.entity.Vaga;
+import br.edu.fateczl.Hotel.model.entity.VagaId;
 
-public class VagaDTO {
+public class VagaDTO implements IDTO<Vaga>{
 	private String estacionamento;
 	private int numVaga;
 	private String descricao;
@@ -30,9 +33,7 @@ public class VagaDTO {
 	public TipoVagaDTO getTipo() {
 		return tipo;
 	}
-	public void setTipo(TipoVaga tipo) {
-		this.tipo = tipo.toDTO();
-	}
+	
 	public void setTipo(TipoVagaDTO tipo) {
 		this.tipo = tipo;
 	}
@@ -41,5 +42,18 @@ public class VagaDTO {
 	}
 	public void setValorDiaria(double valorDiaria) {
 		this.valorDiaria = valorDiaria;
+	}
+	
+	@Override
+	public Vaga toEntity() {
+		Vaga v = new Vaga();
+		v.setDescricao(this.descricao);
+		VagaId vid = new VagaId();
+		vid.setEstacionamento(this.estacionamento);
+		vid.setNumVaga(this.numVaga);
+		v.setId(vid);
+		v.setTipo(this.tipo.toEntity());
+		v.setValorDiaria(this.valorDiaria);
+		return v;
 	}
 }

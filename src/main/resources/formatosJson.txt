@@ -1,0 +1,58 @@
+-- ================ TIPO DOCUMENTO E TIPO VAGA ============ --
+
+{
+	"id": 1,
+	"tipo": "CPF"
+}
+-- ================ Unidade Medida ============ --
+
+{
+	"id":0
+	,"nome":"Grama"
+}
+
+-- ================ Vaga ============ --
+
+{
+	"estacionamento": "E02",
+	"numVaga": 26,
+	"descricao": "vaga para carro",
+	"tipo": {
+		"id": 1,
+		"tipo": "Carro"
+	},
+	"valorDiaria": 20.0
+}
+
+-- ================ Pessoa ============ --
+
+{
+	"id":{
+		"documento":"37329666076"
+		,"tipoDocumento":{
+			"id": 1,
+			"tipo": "CPF"
+		}
+	}
+	,"nome":"Vitor Caio Sales"
+	,"email":"vitor_caio_sales@unink.com.br"
+	,"senha":"HScI2fI5FU"
+	,"telefone":"9637541239"
+}
+
+-- ================ Funcionario ============ --
+
+{
+	"id":{
+		"documento":"56375665698"
+		,"tipoDocumento":{
+			"id": 1,
+			"tipo": "CPF"
+		}
+	}
+	,"nome":"Sandra Mariana Josefa Almeida"
+	,"email":"sandra_almeida@leanclean.com.br"
+	,"senha":"mjU1oWWgoH"
+	,"telefone":"2135069755"
+	,"funcao":2
+}
