@@ -52,6 +52,8 @@ public class Pessoa implements IEntity<PessoaDTO>{
 	public static final int GERENTE = 1;
 	public static final int ATENDENTE = 2;
 	public static final int CLIENTE = 3;
+	public static final int INATIVO = 9;
+	
 	@EmbeddedId
 	private PessoaID id;
 	
