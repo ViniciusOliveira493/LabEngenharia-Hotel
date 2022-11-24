@@ -34,7 +34,7 @@
                             </div>
 
                             <div class="d-flex justify-content-between align-items-center">
-                                <!-- Checkbox -->
+                                <!-- Checkbox 
                                 <div class="form-check mb-0">
                                 <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
                                 <label class="form-check-label" for="form2Example3">
@@ -42,12 +42,13 @@
                                 </label>
                                 </div>
                                 <a href="#!" class="text-body">Esqueceu a senha ?</a>
+                                -->
                             </div>
 
                             <div class="text-center text-lg-start mt-4 pt-2">
                                 <button type="button" class="btn btn-primary btn-lg"
                                 style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
-                                <p class="small fw-bold mt-2 pt-1 mb-0">Não tem uma conta ? <a href="#!"
+                                <p class="small fw-bold mt-2 pt-1 mb-0">Não tem uma conta ? <a href="cadastrar"
                                     class="link-danger">Cadastrar</a></p>
                             </div>
                         </form>

@@ -3,6 +3,6 @@
     if(file_exists("pages/{$rota[0]}.php")){
         include "pages/{$rota[0]}.php";
     }else{
-        include "pages/notFound.html";
+        include "pages/notFound.php";
     }   
 ?>
