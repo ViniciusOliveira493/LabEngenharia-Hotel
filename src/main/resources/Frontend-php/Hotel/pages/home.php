@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
     <head>
         <title>Index</title>
@@ -10,5 +11,12 @@
 
         </main>
         <?php include_once('componentes/footer.php')?>
+
+        <script>
+            <?php 
+                include_once("js/ferramentas/metodosDeApoio.js");
+                include_once("js/paginas/nav.js");
+            ?>
+        </script>
     </body>
 </html>

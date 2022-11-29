@@ -66,7 +66,11 @@
         </main>
         <?php include_once('componentes/footer.php')?>
         <script>
-            <?php require_once("js/paginas/cadastro.js");?>
+            <?php 
+                include_once("js/ferramentas/metodosDeApoio.js");
+                include_once("js/paginas/nav.js");
+                include_once("js/paginas/cadastro.js");
+            ?>
         </script>
 
     </body>

@@ -1,4 +1,4 @@
-<!DOCTYPE html5>
+<!DOCTYPE html>
 <html>
     <head>
         <title>Acesso à conta</title>
@@ -22,14 +22,14 @@
                             <!-- Email input -->
                             <div class="form-outline mb-4">
                                 <label class="form-label" for="form3Example3">Endereço de Email</label>
-                                <input type="email" id="form3Example3" class="form-control form-control-lg"
+                                <input type="email" id="txtEmail" class="form-control form-control-lg"
                                 placeholder="Digite seu email" />                           
                             </div>
 
                             <!-- Password input -->
                             <div class="form-outline mb-3">
-                                <label class="form-label" for="form3Example4">Senha</label>
-                                <input type="password" id="form3Example4" class="form-control form-control-lg"
+                                <label class="form-label" for="senha">Senha</label>
+                                <input type="password" id="txtSenha" class="form-control form-control-lg"
                                 placeholder="Digite sua senha" />                            
                             </div>
 
@@ -46,8 +46,7 @@
                             </div>
 
                             <div class="text-center text-lg-start mt-4 pt-2">
-                                <button type="button" class="btn btn-primary btn-lg"
-                                style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
+                                <button type="button" id="btnLogar" class="btn btn-primary btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
                                 <p class="small fw-bold mt-2 pt-1 mb-0">Não tem uma conta ? <a href="cadastrar"
                                     class="link-danger">Cadastrar</a></p>
                             </div>
@@ -57,5 +56,12 @@
                 </div>
         </main>
         <?php include_once "componentes/footer.php"?>
+        <script>
+             <?php 
+                include_once("js/ferramentas/metodosDeApoio.js");
+                include_once("js/paginas/nav.js");
+                include_once("js/paginas/login.js");
+            ?>
+        </script>
     </body>
 </html>

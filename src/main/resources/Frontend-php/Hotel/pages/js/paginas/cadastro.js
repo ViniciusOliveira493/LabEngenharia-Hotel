@@ -35,7 +35,7 @@ document.getElementById('frmCadastrarCliente').addEventListener('submit',functio
         })
         .done(function(msg){
             alert(msg)
-            window.location.href = "/Hotel"
+            voltarParaHome()
         })
         .fail(function(jqXHR, textStatus, msg){
             alert(msg)
@@ -44,10 +44,6 @@ document.getElementById('frmCadastrarCliente').addEventListener('submit',functio
         alert("senha e confirmar senha precisam ser iguais")
     }
 });
-
-function getValueById(id){
-    return document.getElementById(id).value;
-}
 
 function obterCliente(){
     var cliente = new Object();
