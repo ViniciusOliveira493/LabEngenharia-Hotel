@@ -43,7 +43,7 @@ public class VagaController extends Controller<VagaDTO>{
 	}
 
 	@GetMapping("/vagas/{id}/{estacionamento}")
-	public ResponseEntity<VagaDTO> findOne(@PathVariable(name="id") String a,@PathVariable(name="estacionamento") Integer e) {
+	public ResponseEntity<VagaDTO> findOne(@PathVariable(name="estacionamento") String a,@PathVariable(name="id") Integer e) {
 		VagaId id = new VagaId();
 		id.setEstacionamento(a);
 		id.setNumVaga(e);

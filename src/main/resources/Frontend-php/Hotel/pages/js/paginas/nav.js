@@ -4,7 +4,6 @@ var iconeLogin = getElementById("menuIconeLogin")
 
 if(!checkUndefined(user)){
     user = JSON.parse(user)
-    console.log(user.nome + " | "+user.funcao);
     setarIconeUsuario();
 }else{   
     iconeLogin.innerHTML = '<a class="nav-link" href="login">Login</a>';
@@ -37,7 +36,7 @@ function adicionarMenus(){
     if(!checkUndefined(user)){
         if(user.funcao < 3){
             html += '<li class="nav-item">'
-            +'<a class="nav-link" href="cliente">Clientes</a>'
+            +'<a class="nav-link" href="pessoas">Pessoas</a>'
         +'</li>'
         +'<li class="nav-item">'
             +'<a class="nav-link" href="servico">Serviços</a>'
@@ -46,9 +45,6 @@ function adicionarMenus(){
         if(user.funcao < 2){
             html += 
         '<li class="nav-item">'
-            +'<a class="nav-link" href="funcionarios">Funcionarios</a>'
-        +'</li>'
-        +'<li class="nav-item">'
             +'<a class="nav-link" href="vagas">Vagas</a>'
         +'</li>'
         }
