@@ -92,7 +92,7 @@ public class Pessoa implements IEntity<PessoaDTO>{
 		return senha;
 	}
 	public void setSenha(String senha) {
-		this.senha = MD5(senha);
+		this.senha = senha;
 	}
 	public String getTelefone() {
 		return telefone;
@@ -106,30 +106,6 @@ public class Pessoa implements IEntity<PessoaDTO>{
 	public void setFuncao(int funcao) {
 		this.funcao = funcao;
 	}
-	
-	public static String MD5(String txt) {
-		
-		try {
-			MessageDigest md = MessageDigest.getInstance("MD5");
-			return new String(hexCodes(md.digest(txt.getBytes())));
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		}
-		
-		return "ERROR_90_43_21";
-	}
-	
-	private static char[] hexCodes(byte[] text) {
-        char[] hexOutput = new char[text.length * 2];
-        String hexString;
-
-        for (int i = 0; i < text.length; i++) {
-            hexString = "00" + Integer.toHexString(text[i]);
-            hexString.toUpperCase().getChars(hexString.length() - 2,
-                                    hexString.length(), hexOutput, i * 2);
-        }
-        return hexOutput;
-}
 	
 	@Override
 	public PessoaDTO toDTO() {

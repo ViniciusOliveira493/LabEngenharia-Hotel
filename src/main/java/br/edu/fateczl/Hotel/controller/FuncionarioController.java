@@ -62,6 +62,7 @@ public class FuncionarioController extends Controller<PessoaDTO>{
 	public ResponseEntity<String> insert(@Valid @RequestBody PessoaDTO obj) {
 		Optional<Pessoa> p = rep.findById(obj.getId());
 		if(p.isEmpty()) {
+			obj.setSenha(obj.getTelefone());
 			rep.save(obj.toEntity());
 			return ResponseEntity.ok().body(this.sucesso(1));
 		}else {
@@ -73,6 +74,10 @@ public class FuncionarioController extends Controller<PessoaDTO>{
 	@Override
 	@PutMapping("/funcionario")
 	public ResponseEntity<String> update(@Valid @RequestBody PessoaDTO obj) {
+		System.out.println("senha ctrl = "+obj.getSenha());
+		if(obj.getSenha() == null) {
+			obj.setSenha(null);
+		}
 		rep.save(obj.toEntity());
 		return ResponseEntity.ok().body(this.sucesso(2));
 	}

@@ -61,13 +61,17 @@ public class PessoaController extends Controller<PessoaDTO>{
 	@Override
 	@PostMapping("/pessoa")
 	public ResponseEntity<String> insert(@Valid @RequestBody PessoaDTO obj) {
+		if(obj.getSenha() == null || obj.getSenha() == "") {
+			obj.setSenha(obj.getTelefone());
+		}
+		
 		rep.save(obj.toEntity());
 		return ResponseEntity.ok().body(this.sucesso(1));
 	}
 
 	@PostMapping("/login")
 	public ResponseEntity<PessoaDTO> login(@Valid @RequestBody PessoaDTO obj) {
-		Pessoa p = rep.fn_login(obj.getEmail(), Pessoa.MD5(obj.getSenha()));
+		Pessoa p = rep.fn_login(obj.getEmail(), obj.getSenha());
 		if(p != null) {
 			return ResponseEntity.ok().body(p.toDTO());
 		}
@@ -77,6 +81,10 @@ public class PessoaController extends Controller<PessoaDTO>{
 	@Override
 	@PutMapping("/pessoa")
 	public ResponseEntity<String> update(@Valid @RequestBody PessoaDTO obj) {
+		System.out.println("senha ctrl = "+obj.getSenha());
+		if(obj.getSenha() == null) {
+			obj.setSenha(null);
+		}
 		rep.save(obj.toEntity());
 		return ResponseEntity.ok().body(this.sucesso(2));
 	}
@@ -92,6 +100,12 @@ public class PessoaController extends Controller<PessoaDTO>{
 	public ResponseEntity<PessoaDTO> findOne(Integer a) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public Pessoa getPessoa(PessoaID id) {
+		Optional<Pessoa> p = rep.findById(id);
+		Pessoa pessoa = p.orElseThrow(()-> new ResourceNotFoundException("Não encontrado..."));
+		return pessoa;
 	}
 	
 }
