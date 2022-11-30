@@ -2,10 +2,14 @@ package br.edu.fateczl.Hotel.model.entity;
 
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 import br.edu.fateczl.Hotel.model.dto.ProdutoServicoDTO;
 import br.edu.fateczl.Hotel.model.entity.interfaces.IEntity;
 
+@Entity
+@Table(name = "tbProdutoServico")
 public class ProdutoServico implements IEntity<ProdutoServicoDTO> {
 
 	@EmbeddedId

@@ -43,8 +43,8 @@ public class ProdutoServicoController extends Controller<ProdutoServicoDTO>{
 			return prse;
 		}
 
-		@GetMapping("/produtoservico/{pCodigo}/{sCodigo}")
-		public ResponseEntity<ProdutoServicoDTO> findOne(@PathVariable(name="pCodigo") Integer p,@PathVariable(name="sCodigo") Integer s) {
+		@GetMapping("/produtoservico/{id}/{Codigo}")
+		public ResponseEntity<ProdutoServicoDTO> findOne(@PathVariable(name="id") Integer p,@PathVariable(name="codigo") Integer s) {
 			ProdutoServicoID id = new ProdutoServicoID();
 			id.setPCodigo(p);
 			id.setSCodigo(s);
