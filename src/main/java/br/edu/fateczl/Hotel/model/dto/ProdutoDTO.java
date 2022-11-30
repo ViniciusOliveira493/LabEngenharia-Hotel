@@ -5,18 +5,18 @@ import br.edu.fateczl.Hotel.model.entity.Produto;
 
 public class ProdutoDTO implements IDTO<Produto> {
 
-	private Integer codigo;
+	private Integer id;
 	private String nome;
 	private Double valor;
 	private Double conteudo;
 	private UnidadeDeMedidaDTO UdM;
 
 	public Integer getCodigo() {
-		return codigo;
+		return id;
 	}
 
 	public void setCodigo(Integer codigo) {
-		this.codigo = codigo;
+		this.id = codigo;
 	}
 
 	public String getNome() {
@@ -54,7 +54,7 @@ public class ProdutoDTO implements IDTO<Produto> {
 	@Override
 	public Produto toEntity() {
 		Produto p = new Produto();
-		p.setCodigo(this.codigo);
+		p.setCodigo(this.id);
 		p.setNome(this.nome);
 		p.setUdM(this.UdM.toEntity());
 		return p;
