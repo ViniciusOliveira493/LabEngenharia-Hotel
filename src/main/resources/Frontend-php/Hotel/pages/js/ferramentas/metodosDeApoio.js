@@ -8,6 +8,40 @@ function getElementById(id){
   return document.getElementById(id);
 }
 
+function checkUndefined(msg){
+  return typeof msg === "undefined"
+}
+function voltarParaHome(){
+  window.location.href = "/Hotel"
+}
+/* Operações com documentos*/
+function limparDocumento(txt){
+  txt = txt.replaceAll(".","");
+  txt = txt.replaceAll("-","");
+  txt = txt.replaceAll(" ","");
+  return txt;
+}
+
+function carregarTiposDocumento(selectIds){
+	$.ajax({
+		url : 'http://localhost:8080/api/tipodocumento',
+		contentType: "application/json",
+		type : "GET",
+		data : ""
+	})
+	.done(function(msg){
+        selectIds.forEach(e =>{
+          let select = document.getElementById(e);
+          msg.forEach(f => {
+            getElementById(e).append(criarOptionDocumento(f));
+          });
+        });		
+	})
+	.fail(function(jqXHR, textStatus, msg){
+		console.log(msg);
+	});
+}
+
 function aplicarMascarasDocumentos(select,field){
   getElementById(field).value = "";
   //CPF
@@ -27,20 +61,9 @@ function aplicarMascarasDocumentos(select,field){
  }
 }
 
-function checkUndefined(msg){
-  return typeof msg === "undefined"
+function criarOptionDocumento(opcao){
+  return new Option(opcao.tipo,opcao.id)
 }
-function voltarParaHome(){
-  window.location.href = "/Hotel"
-}
-/* */
-function limparDocumento(txt){
-  txt = txt.replaceAll(".","");
-  txt = txt.replaceAll("-","");
-  txt = txt.replaceAll(" ","");
-  return txt;
-}
-
 /*  ============== COOKIES ==================    */
 function setCookie(name,value,maxAgeSeconds){
 	document.cookie = name+ "=" + value + ";SameSite=None; Secure; max-age="+maxAgeSeconds;

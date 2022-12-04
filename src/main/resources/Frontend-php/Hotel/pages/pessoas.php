@@ -7,8 +7,8 @@
     </head>
     <body>
         <?php include_once('componentes/nav.php')?>
-        <main class="conteudo">
-            <div class="container mt-4">
+        <main class="conteudo bg">
+            <div class="container bg-white">
                 <div class="row border">
                     <div class="col-3">
                         <!--

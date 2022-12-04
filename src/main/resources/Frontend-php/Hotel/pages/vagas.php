@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Vagas de Estacionamento</title>
+        <title>Vagas de Estacionamento</title>       
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     </head>
@@ -9,7 +9,7 @@
         <?php include_once('componentes/nav.php')?>
 <!-- Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
+  <div class="modal-dialog modal-lg bg-white" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLongTitle">Adicionar Vagas</h5>
@@ -59,9 +59,9 @@
     </div>
   </div>
 </div>
-<!-- Kodal -->
-        <main class="conteudo">
-            <div class="container mt-4">
+<!-- Modal -->
+        <main class="conteudo bg">
+            <div class="container bg-white">
                 <div class="row border">
                     <div class="col-3">
                         <div class="input-group mb-3">   

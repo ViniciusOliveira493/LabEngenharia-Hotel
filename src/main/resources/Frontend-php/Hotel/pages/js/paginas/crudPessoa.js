@@ -55,33 +55,13 @@ getElementById('btnBuscarUser').addEventListener('click',function submitFormCad(
 
 function onloadA(){
     limpaDados();
-    carregarTiposDocumento();
+    var selects = ['selectTipoDocumento','selectTipoDocumentoBusca'];
+    carregarTiposDocumento(selects);
     carregarFuncoes();
 }
 
-function criarOption(opcao){
+function criarOptionFuncao(opcao){
     return new Option(opcao.tipo,opcao.id)
-}
-
-function carregarTiposDocumento(){
-	$.ajax({
-		url : 'http://localhost:8080/api/tipodocumento',
-		contentType: "application/json",
-		type : "GET",
-		data : ""
-	})
-	.done(function(msg){
-        let select = document.getElementById('selectTipoDocumento');
-        let select2 = document.getElementById('selectTipoDocumentoBusca');
-        msg.forEach(e => {
-            select.append(criarOption(e));
-            select2.append(criarOption(e));
-        });
-		
-	})
-	.fail(function(jqXHR, textStatus, msg){
-		console.log(msg);
-	});
 }
 function carregarFuncoes(){
     let select = document.getElementById('selectFuncao');
@@ -89,10 +69,10 @@ function carregarFuncoes(){
         let opcao = new Object();
         opcao.id = 2
         opcao.tipo = "Atendente"
-        select.append(criarOption(opcao));
+        select.append(criarOptionFuncao(opcao));
         opcao.id = 1
         opcao.tipo = "Gerente"
-        select.append(criarOption(opcao));
+        select.append(criarOptionFuncao(opcao));
     }
 }
 
