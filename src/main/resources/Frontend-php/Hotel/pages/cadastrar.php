@@ -26,7 +26,7 @@
                             <div class="mt-3">
                                 <div class="form-group">
                                     <label for="Nome">Nome:</label>
-                                    <input type="text" class="form-control" id="txtNome" aria-describedby="emailHelp" placeholder="Seu email">
+                                    <input type="text" class="form-control" id="txtNome" aria-describedby="emailHelp" placeholder="Seu nome">
                                 </div>
                             </div>
                             <div class="mt-3">

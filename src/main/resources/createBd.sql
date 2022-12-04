@@ -7,6 +7,11 @@ GO
 
 INSERT INTO tbTipoDocumento(nomeTipo)
     VALUES
-        ('RG')
         ,('CPF')
         , ('ITIN number')
+        
+INSERT INTO tbTipoVaga(tipo)
+    VALUES
+        ('Carro')
+        ,('Moto') 
+        ,('Ônibus')

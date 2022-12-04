@@ -23,12 +23,21 @@ import br.edu.fateczl.Hotel.model.dto.VagaDTO;
 import br.edu.fateczl.Hotel.model.entity.Vaga;
 import br.edu.fateczl.Hotel.model.entity.VagaId;
 import br.edu.fateczl.Hotel.repository.VagaRepository;
+import br.edu.fateczl.Hotel.repository.VagasCustom.RepCustomVagas;
 
 @RestController
 @RequestMapping("/api")
 public class VagaController extends Controller<VagaDTO>{
 	@Autowired
 	VagaRepository rep;
+	
+	RepCustomVagas repc = new RepCustomVagas();
+	
+	@GetMapping("/vagas/{estacionamento}")
+	public List<VagaDTO> findByEstacionamento(@PathVariable(name="estacionamento") String a) {
+		List<VagaDTO> vagas = repc.findVagasPorEstacionamento(a);
+		return vagas;
+	}
 	
 	@Override
 	@GetMapping("/vagas/")
@@ -41,9 +50,9 @@ public class VagaController extends Controller<VagaDTO>{
 		}
 		return va;
 	}
-
+	
 	@GetMapping("/vagas/{id}/{estacionamento}")
-	public ResponseEntity<VagaDTO> findOne(@PathVariable(name="id") String a,@PathVariable(name="estacionamento") Integer e) {
+	public ResponseEntity<VagaDTO> findOne(@PathVariable(name="estacionamento") String a,@PathVariable(name="id") Integer e) {
 		VagaId id = new VagaId();
 		id.setEstacionamento(a);
 		id.setNumVaga(e);
