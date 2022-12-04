@@ -7,8 +7,8 @@
     </head>
     <body>
         <?php include_once('componentes/nav.php')?>
-        <main class="conteudo">
-            <div class="container mt-4">
+        <main class="bg">
+            <div class="container bg-white">
                 <div class="row border">
                     <div class="col-3">
                         <div class="input-group mb-3">   
@@ -16,8 +16,7 @@
                                 <div class="input-group-append">
                                     <label for="slTipoDocumento">Tipo de Documento:</label>
                                     <select class="form-control" id="selectTipoDocumentoBusca">
-                                        <option>Selecione um tipo de documento</option>
-                                    
+                                        <option>Selecione um tipo de documento</option>                                    
                                     </select>     
                                 </div>  
                                 <div class="form-group">
@@ -58,7 +57,37 @@
                     </div>
                     <div class="col-9">
                         <form>                        
-                            
+                            <div class="input-group-append">
+                                <label for="slTipoDocumento">Tipo de Documento:</label>
+                                <select class="form-control" id="selectTipoDocumentoForm">
+                                    <option>Selecione um tipo de documento</option>                                    
+                                </select>     
+                            </div>  
+                            <div class="form-group">
+                                <label for="txtDocumentoCliente">Documento:</label>
+                                <input type="text" class="form-control" id="txtDocumentoClienteForm" placeholder="Digite o numero do estacionamento">
+                            </div>
+                            <div class="form-group">
+                                <label for="txtDocumentoCliente">Data Início:</label>
+                                <input type="datetime-local" class="form-control" id="dataInicioReserva">
+                            </div>
+                            <div class="form-group">
+                                <label for="txtDocumentoCliente">Data Fim:</label>
+                                <input type="datetime-local" class="form-control" id="dataFimReserva">
+                            </div>
+                            <div class="input-group-append">
+                                <label for="select Tipo do Quarto">Tipo de Quarto:</label>
+                                <select class="form-control" id="slTipoQuarto">
+                                    <option>Selecione um tipo de quarto</option>                                    
+                                </select>     
+                            </div>  
+                            <div class="input-group-append">
+                                <label for="select Quarto">Quarto</label>
+                                <select class="form-control" id="selectQuarto">
+                                    <option>Selecione um Quarto disponível:</option>                                    
+                                </select>     
+                            </div>
+                             // Vagas
                         </form>
                     </div>
                 </div>
