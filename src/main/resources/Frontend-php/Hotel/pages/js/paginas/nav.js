@@ -30,7 +30,10 @@ function setarIconeUsuario(){
 function adicionarMenus(){
     var div = getElementById("menuNavItens");
     var html = ' <li class="nav-item">'
-        +'<a class="nav-link active" aria-current="page" href="home">Home</a>'
+        +'<a class="nav-link" aria-current="page" href="home">Home</a>'
+        +'</li>'
+        +' <li class="nav-item">'
+        +'<a class="nav-link" aria-current="page" href="reservas">Reservas</a>'
         +'</li>';
     
     if(!checkUndefined(user)){

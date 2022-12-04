@@ -59,7 +59,7 @@
     </div>
   </div>
 </div>
-<!-- Kodal -->
+<!-- Modal -->
         <main class="conteudo">
             <div class="container mt-4">
                 <div class="row border">
