@@ -1,5 +1,58 @@
 window.onload = onloadA();
 var editar = false;
+
+getElementById('btnSendCad').addEventListener('click',function submitFormCad(e){
+    var metodo ="";
+    if(!editar){
+        metodo="POST";
+    }else{
+        metodo="PUT";
+    }
+    alterarUsuario(metodo);
+});
+
+getElementById('btnApagarCad').addEventListener('click',function submitFormCad(e){
+    var metodo ="DELETE";
+    alterarUsuario(metodo);
+});
+
+getElementById("selectTipoDocumento").addEventListener("change",function(){
+    aplicarMascarasDocumentos("selectTipoDocumento","txtDocumentoUser")
+});
+
+getElementById("selectTipoDocumentoBusca").addEventListener("change",function(){
+    aplicarMascarasDocumentos("selectTipoDocumentoBusca","txtDocumentoBusca")
+});
+
+getElementById('btnEditCad').addEventListener('click',function submitFormCad(e){
+    permitirEdicao();
+});
+
+getElementById('btnBuscarUser').addEventListener('click',function submitFormCad(e){
+    var documento = limparDocumento(getValueById('txtDocumentoBusca'));
+    var tipoDoc = getValueById('selectTipoDocumentoBusca');
+
+    var lista = getElementById("listaClientes");
+    lista.innerHTML = "";
+    
+    var url;
+
+    url = urlbase+"pessoa/"+tipoDoc+"/"+documento
+
+    $.ajax({
+		url : url,
+		contentType: "application/json",
+		type : "GET",
+		data : null
+	})
+	.done(function(msg){		
+        lista.append(criarItemCliente(msg));		
+	})
+	.fail(function(jqXHR, textStatus, msg){
+		console.log(msg);
+	});
+});
+
 function onloadA(){
     limpaDados();
     carregarTiposDocumento();
@@ -30,7 +83,6 @@ function carregarTiposDocumento(){
 		console.log(msg);
 	});
 }
-
 function carregarFuncoes(){
     let select = document.getElementById('selectFuncao');
     if(user.funcao < 2){
@@ -43,57 +95,26 @@ function carregarFuncoes(){
         select.append(criarOption(opcao));
     }
 }
-document.getElementById('btnEditCad').addEventListener('click',function submitFormCad(e){
-    permitirEdicao();
-});
-
-document.getElementById('btnBuscarUser').addEventListener('click',function submitFormCad(e){
-    var documento = getValueById('txtDocumentoBusca');
-    var tipoDoc = getValueById('selectTipoDocumentoBusca');
-
-    var lista = getElementById("listaClientes");
-    lista.innerHTML = "";
-    
-    var url;
-
-    if(!getElementById('cbFuncionario').checked){
-        url = urlbase+"pessoa/"+tipoDoc+"/"+documento
-    }else{
-        url = urlbase+"funcionario/"+tipoDoc+"/"+documento
-    }
-
-    $.ajax({
-		url : url,
-		contentType: "application/json",
-		type : "GET",
-		data : null
-	})
-	.done(function(msg){		
-        lista.append(criarItemCliente(msg));		
-	})
-	.fail(function(jqXHR, textStatus, msg){
-		console.log(msg);
-	});
-});
 
 function criarItemCliente(dados){
     var usr = document.createElement('li');
     usr.setAttribute("class","list-group-item")
-    usr.setAttribute("onclick","abrirUsuario("+dados.id.documento+","+dados.id.tipoDocumento.id+")")
+    usr.setAttribute("onclick","abrirUsuario('"+dados.id.documento+"','"+dados.id.tipoDocumento.id+"')")
     usr.append(dados.nome)
     return usr;
 }
 
 function abrirUsuario(doc,tipo){
-    var url = urlbase+"pessoa/"+tipo+"/"+doc
-
+    console.log(doc);
+    var url = urlbase+"pessoa/"+tipo+"/"+doc;   
     $.ajax({
 		url : url,
 		contentType: "application/json",
 		type : "GET",
 		data : null
 	})
-	.done(function(msg){		
+	.done(function(msg){        
+        console.log(JSON.stringify(msg))		
         setDados(msg);		
 	})
 	.fail(function(jqXHR, textStatus, msg){
@@ -102,11 +123,11 @@ function abrirUsuario(doc,tipo){
 }
 
 function setDados(dados){
-    getElementById('txtDocumentoUser').value = dados.id.documento
-    getElementById('txtDocumentoUser').disabled = true;
-
     getElementById('selectTipoDocumento').value = dados.id.tipoDocumento.id
     getElementById('selectTipoDocumento').disabled = true;
+
+    getElementById('txtDocumentoUser').value = dados.id.documento
+    getElementById('txtDocumentoUser').disabled = true;
 
     getElementById('txtNome').value = dados.nome;
     getElementById('txtNome').disabled = true;
@@ -124,8 +145,6 @@ function setDados(dados){
 
 function permitirEdicao(){
     editar = true;
-    getElementById('txtDocumentoUser').disabled = false;
-    getElementById('selectTipoDocumento').disabled = false;
     getElementById('txtNome').disabled = false;
     getElementById('txtEmail').disabled = false;
     getElementById('txtTelefone').disabled = false;
@@ -145,7 +164,7 @@ function getDados(){
     var cliente = new Object();
 
     var id = new Object();
-    id.documento = getValueById('txtDocumentoUser');
+    id.documento = limparDocumento(getValueById('txtDocumentoUser'));
     var tipoDoc = new Object();
     tipoDoc.id = document.getElementById('selectTipoDocumento').value;
     id.tipoDocumento = tipoDoc;
@@ -159,21 +178,6 @@ function getDados(){
     return cliente;
 }
 
-document.getElementById('btnSendCad').addEventListener('click',function submitFormCad(e){
-    var metodo ="";
-    if(editar){
-        metodo="POST";
-    }else{
-        metodo="POST";
-    }
-    alterarUsuario(metodo);
-});
-
-document.getElementById('btnApagarCad').addEventListener('click',function submitFormCad(e){
-    var metodo ="DELETE";
-    alterarUsuario(metodo);
-});
-
 function alterarUsuario(metodo){
     var dados = getDados();
     var endpoint = "";
@@ -185,7 +189,6 @@ function alterarUsuario(metodo){
 
     var url = urlbase+endpoint;
 
-    console.log(metodo)
     $.ajax({
 		url : url,
 		contentType: "application/json",

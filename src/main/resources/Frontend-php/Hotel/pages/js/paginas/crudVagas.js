@@ -15,9 +15,11 @@ function carregarSelect(){
 		data : null
 	})
 	.done(function(msg){		
-        var select = getElementById('selectTipoVaga')       
+        var select = getElementById('selectTipoVaga');
+        var select2 = getElementById('selectTipoVagaModal');
         msg.forEach(e => {
             select.append(criarOptionTipoVaga(e))
+            select2.append(criarOptionTipoVaga(e))
         });
 	})
 	.fail(function(jqXHR, textStatus, msg){
@@ -38,7 +40,6 @@ function criarOptionTipoVaga(opcao){
 }
 
 function abrirVaga(estacionamento,numeroVaga){
-    console.log(estacionamento + " | "+numeroVaga)
     var url = urlbase + "vagas/"+numeroVaga+"/"+estacionamento;
     $.ajax({
 		url : url,
@@ -69,7 +70,7 @@ function setDados(dados){
 
 }
 
-function getDados(dados){
+function getDados(){
     var vaga = new Object();
     vaga.estacionamento=getElementById('txtEstacionamentoVaga').value;
     vaga.numVaga=getElementById('txtNumVaga').value;
@@ -82,21 +83,21 @@ function getDados(dados){
     return vaga;
 }
 
-function alterarVaga(metodo){
-    var dados = getDados();
+function alterarVaga(metodo,dados,enviarMensagem){
     var endpoint = "vagas";  
 
     var url = urlbase+endpoint;
 
-    console.log(JSON.stringify(dados));
     $.ajax({
 		url : url,
 		contentType: "application/json",
 		type : metodo,
 		data : JSON.stringify(dados)
 	})
-	.done(function(msg){		
-       alert(msg);	
+	.done(function(msg){
+        if(enviarMensagem){
+            alert(msg);	
+        }
        limpaDados();	
 	})
 	.fail(function(jqXHR, textStatus, msg){
@@ -105,6 +106,7 @@ function alterarVaga(metodo){
 }
 
 function permitirEdicao(){
+    editar = true;
     getElementById('txtEstacionamentoVaga').disabled = false;
     getElementById('txtNumVaga').disabled = false;
     getElementById('txtDescricao').disabled = false;
@@ -113,6 +115,7 @@ function permitirEdicao(){
 }
 
 function limpaDados(){
+    editar = false;
     getElementById('txtEstacionamentoVaga').value = "";
     getElementById('txtNumVaga').value = "";
     getElementById('txtDescricao').value = "";
@@ -127,14 +130,15 @@ document.getElementById('btnBuscarVaga').addEventListener('click',function submi
     var txtEstacionamento = getValueById('txtEstacionamentoVagaBusca');
     var txtNumVaga = getValueById('txtBuscaVaga');
 
-    console.log(txtEstacionamento + " | "+txtNumVaga)
-
     var lista = getElementById("listaVagas");
     lista.innerHTML = "";
-    
-    var url;    
-    url = urlbase+"vagas/"+txtNumVaga+"/"+txtEstacionamento
-  
+    console.log(txtNumVaga)
+    var url;  
+    if((txtEstacionamento!=null || txtEstacionamento.length!==0) && (txtNumVaga===null || txtNumVaga.length===0)){  
+        url = urlbase+"vagas/"+txtEstacionamento;
+    }else{
+        url = urlbase+"vagas/"+txtNumVaga+"/"+txtEstacionamento;
+    }
     console.log(url)
     $.ajax({
 		url : url,
@@ -142,8 +146,15 @@ document.getElementById('btnBuscarVaga').addEventListener('click',function submi
 		type : "GET",
 		data : null
 	})
-	.done(function(msg){		
-        lista.append(criarItemVaga(msg));		
+	.done(function(msg){	
+        if(Array.isArray(msg)){
+            msg.forEach(e => {
+                lista.append(criarItemVaga(e));	
+            }); 
+        }
+        if(!Array.isArray(msg)){
+            lista.append(criarItemVaga(msg));	
+        }     	
 	})
 	.fail(function(jqXHR, textStatus, msg){
 		console.log(msg);
@@ -151,13 +162,56 @@ document.getElementById('btnBuscarVaga').addEventListener('click',function submi
 });
 
 document.getElementById('btnSendCad').addEventListener('click',function submitFormCad(e){
-    if(editar){
-        alterarVaga('POST');
+    var dados = getDados();
+    if(!editar){
+        alterarVaga('POST',dados,true);
     }else{
-        alterarVaga('POST');
+        alterarVaga('PUT',dados,true);
     }
 });
 
-document.getElementById('btnApagarCad').addEventListener('click',function submitFormCad(e){   
-    alterarVaga('DELETE'); 
+document.getElementById('btnApagarCad').addEventListener('click',function submitFormCad(e){  
+    var dados = getDados(); 
+    alterarVaga('DELETE',dados,true); 
 });
+
+//=========================== MODAL ================================
+document.getElementById('btnSubmitModal').addEventListener('click',function submitFormCad(e){   
+    var vagas = getDadosModal();
+    for(let i=vagas.inicio;i<=(vagas.fim);i++){
+        var vaga = new Object();
+        vaga.estacionamento = vagas.estacionamento;
+        vaga.numVaga = i;
+        vaga.descricao = vagas.descricao;
+        vaga.tipo = vagas.tipo;
+        vaga.valorDiaria = vagas.valorDiaria;
+
+        alterarVaga('POST',vaga,false);       
+    }
+    alert("Vagas cadastradas com sucesso");
+    limparDadosModal();
+});
+
+function getDadosModal(){
+    var vaga = new Object();
+    vaga.estacionamento=getElementById('txtEstacionamentoVagaModal').value;
+    vaga.inicio=parseInt(getElementById('txtNumPrimeiraVaga').value);
+    vaga.fim=parseInt(getElementById('txtNumUltimaVaga').value);
+    vaga.descricao=getElementById('txtDescricaoModal').value;
+    var tipoVaga = new Object();
+    tipoVaga.id = getElementById('selectTipoVagaModal').value;
+
+    vaga.tipo= tipoVaga;
+    vaga.valorDiaria=getElementById('txtDiariaModal').value;
+
+    return vaga;
+}
+
+function limparDadosModal(){
+    getElementById('txtEstacionamentoVagaModal').value ="";
+    getElementById('txtNumPrimeiraVaga').value="0";
+    getElementById('txtNumUltimaVaga').value="0";
+    getElementById('txtDescricaoModal').value="";
+    getElementById('selectTipoVagaModal').value="0";
+    getElementById('txtDiariaModal').value="0.00";
+}

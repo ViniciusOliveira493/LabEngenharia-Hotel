@@ -11,25 +11,29 @@
             <div class="container mt-4">
                 <div class="row border">
                     <div class="col-3">
+                        <!--
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="" id="cbFuncionario">
                             <label class="form-check-label" for="flexCheckDefault">
                                Buscar apenas funcionários
                             </label>
                         </div>
-
-                        <div class="input-group mb-3">                       
-                            <input type="text" id="txtDocumentoBusca" class="form-control" placeholder="buscar usuário" aria-label="buscar usuário" aria-describedby="button-addon2">
+                        -->
+                        
+                        <div class="input-group mb-3">  
                             <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="button" id="btnBuscarUser">Buscar</button>
-                            </div> 
-                            <div class="input-group-append">
-                                <label for="exampleFormControlSelect1">Tipo de Documento</label>
+                                <label for="exampleFormControlSelect1">Tipo de Documento:</label>
                                 <select class="form-control" id="selectTipoDocumentoBusca">
                                     <option>Selecione um tipo de documento</option>
                                 
                                 </select>     
-                            </div>                     
+                            </div>  
+                            <div class="input-group mt-2">
+                                <input type="text" id="txtDocumentoBusca" class="form-control " placeholder="buscar usuário" aria-label="buscar usuário" aria-describedby="button-addon2">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="button" id="btnBuscarUser">Buscar</button>
+                                </div>  
+                            </div>                                           
                         </div>
                         <div class="input-group mb-3">
                             <ul class="list-group col-12" id="listaClientes">
@@ -39,16 +43,18 @@
                     </div>
                     <div class="col-9">
                     <form>
-                        <div class="form-group">
-                            <label for="formGroupExampleInput">Documento</label>
-                            <input type="text" class="form-control" id="txtDocumentoUser" placeholder="Digite o numero do documento">
-                        </div>
+                       
                         <div class="form-group mt-1">
                             <label for="exampleFormControlSelect1">Tipo de Documento</label>
                             <select class="form-control" id="selectTipoDocumento">
                                 <option>Selecione um tipo de documento</option>
                                
                             </select>
+
+                            <div class="form-group">
+                                <label for="formGroupExampleInput">Documento</label>
+                                <input type="text" class="form-control" id="txtDocumentoUser" placeholder="Digite o numero do documento">
+                            </div>
 
                             <div class="mt-3">
                                 <div class="form-group">
