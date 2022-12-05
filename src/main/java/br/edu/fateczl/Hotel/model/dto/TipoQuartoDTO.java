@@ -7,8 +7,18 @@ import br.edu.fateczl.Hotel.model.entity.TipoQuarto;
 
 public class TipoQuartoDTO implements IDTO<TipoQuarto>, Serializable {
 	private static final long serialVersionUID = 1L;
+	private Integer id;
 	private double valorDiaria;
 	private String tipo;
+
+	
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public double getValorDiaria() {
 		return valorDiaria;
@@ -28,6 +38,7 @@ public class TipoQuartoDTO implements IDTO<TipoQuarto>, Serializable {
 
 	public TipoQuarto toEntity() {
 		TipoQuarto tq = new TipoQuarto();
+		tq.setId(this.id);
 		tq.setTipo(this.tipo);
 		tq.setValorDiaria(this.valorDiaria);
 		return tq;

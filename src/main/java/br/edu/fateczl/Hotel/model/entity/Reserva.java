@@ -1,6 +1,5 @@
 package br.edu.fateczl.Hotel.model.entity;
 
-import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 

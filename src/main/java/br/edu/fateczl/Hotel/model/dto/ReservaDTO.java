@@ -3,10 +3,8 @@ package br.edu.fateczl.Hotel.model.dto;
 import br.edu.fateczl.Hotel.model.dto.interfaces.IDTO;
 import br.edu.fateczl.Hotel.model.entity.Pessoa;
 import br.edu.fateczl.Hotel.model.entity.Quarto;
-import br.edu.fateczl.Hotel.model.entity.QuartoID;
 import br.edu.fateczl.Hotel.model.entity.Reserva;
 import br.edu.fateczl.Hotel.model.entity.Vaga;
-import br.edu.fateczl.Hotel.model.entity.VagaId;
 
 public class ReservaDTO implements IDTO<Reserva> {
 	private String dataInicio;

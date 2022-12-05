@@ -18,6 +18,8 @@ public class TipoQuarto implements IEntity<TipoQuartoDTO>, Serializable{
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", nullable = false)
+	private Integer id;
 	@Column(name = "tipo", nullable = false)
 	private String tipo;
 	@Column(name = "valordiaria", nullable = false)
@@ -39,8 +41,17 @@ public class TipoQuarto implements IEntity<TipoQuartoDTO>, Serializable{
 		this.valorDiaria = valorDiaria;
 	}
 
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	public TipoQuartoDTO toDTO() {
 		TipoQuartoDTO dto = new TipoQuartoDTO();
+		dto.setId(this.id);
 		dto.setTipo(this.tipo);
 		dto.setValorDiaria(this.valorDiaria);
 		return dto;

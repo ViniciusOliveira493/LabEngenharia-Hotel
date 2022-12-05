@@ -1,7 +1,6 @@
 package br.edu.fateczl.Hotel.model.entity;
 
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -11,17 +10,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 import br.edu.fateczl.Hotel.model.dto.QuartoDTO;
 import br.edu.fateczl.Hotel.model.entity.interfaces.IEntity;
 
 @Entity
 @Table(name = "tbQuarto")
 public class Quarto implements IEntity<QuartoDTO> {
-	@EmbeddedId
-	private QuartoID id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", nullable = false)
+	private Long id;
 
 	@ManyToOne(targetEntity = TipoQuarto.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "tipo", nullable = false)
@@ -36,11 +34,11 @@ public class Quarto implements IEntity<QuartoDTO> {
 	@Column(name = "predio", nullable = false)
 	private String predio;
 
-	public QuartoID getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(QuartoID id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -82,7 +80,7 @@ public class Quarto implements IEntity<QuartoDTO> {
 		dto.setNumero(this.numero);
 		dto.setPredio(this.predio);
 		dto.setTipo(this.tipo.toDTO());
-		dto.setId(this.id.getID());
+		dto.setId(this.id);
 		return dto;
 	}
 }
