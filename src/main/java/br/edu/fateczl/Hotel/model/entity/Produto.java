@@ -19,14 +19,14 @@ public class Produto implements IEntity<ProdutoDTO>{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", length = 10, nullable = false)
-	private Integer id;
+	@Column(name = "codigo", length = 10, nullable = false)
+	private Integer codigo;
 
 	@Column(name = "nome", length = 50, nullable = false)
 	private String nome;
 
 	@ManyToOne(targetEntity = UnidadeDeMedida.class, fetch = FetchType.LAZY)
-	@JoinColumn(name = "UdM", nullable = false)
+	@JoinColumn(name = "id", nullable = false)
 	private UnidadeDeMedida UdM;
 
 	@Column(name = "valor", nullable = false)
@@ -36,11 +36,11 @@ public class Produto implements IEntity<ProdutoDTO>{
 	private Double conteudo;
 
 	public Integer getCodigo() {
-		return id;
+		return codigo;
 	}
 
 	public void setCodigo(Integer codigo) {
-		this.id = codigo;
+		this.codigo = codigo;
 	}
 
 	public String getNome() {
@@ -78,7 +78,7 @@ public class Produto implements IEntity<ProdutoDTO>{
 	@Override
 	public ProdutoDTO toDTO() {
 		ProdutoDTO dto = new ProdutoDTO();
-		dto.setCodigo(this.id);
+		dto.setCodigo(this.codigo);
 		dto.setNome(this.nome);
 		dto.setUdM(this.UdM.toDTO());
 		dto.setValor(this.valor);

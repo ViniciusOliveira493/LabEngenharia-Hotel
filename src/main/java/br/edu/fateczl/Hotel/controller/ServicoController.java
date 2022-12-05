@@ -30,7 +30,7 @@ public class ServicoController extends Controller<ServicoDTO>{
 	ServicoRepository rep;
 	
 	@Override
-	@GetMapping("/servico")
+	@GetMapping("/servico/")
 	public List<ServicoDTO> findAll() {
 		List<Servico> lista = rep.findAll();
 		List<ServicoDTO> li = new ArrayList<>();
@@ -51,21 +51,21 @@ public class ServicoController extends Controller<ServicoDTO>{
 	}
 
 	@Override
-	@PostMapping("/servico/")
+	@PostMapping("/servico")
 	public ResponseEntity<String> insert(@Valid @RequestBody ServicoDTO obj) {
 		rep.save(obj.toEntity());
 		return ResponseEntity.ok().body(this.sucesso(1));
 	}
 
 	@Override
-	@PutMapping("/servico/")
+	@PutMapping("/servico")
 	public ResponseEntity<String> update(@Valid @RequestBody ServicoDTO obj) {
 		rep.save(obj.toEntity());
 		return ResponseEntity.ok().body(this.sucesso(2));
 	}
 
 	@Override
-	@DeleteMapping("/servico/")
+	@DeleteMapping("/servico")
 	public ResponseEntity<String> delete(ServicoDTO obj) {
 		rep.delete(obj.toEntity());
 		return ResponseEntity.ok().body(this.sucesso(3));

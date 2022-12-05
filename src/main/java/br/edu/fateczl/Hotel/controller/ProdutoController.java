@@ -43,8 +43,8 @@ public class ProdutoController extends Controller<ProdutoDTO>{
 		}
 
 		@Override
-		@GetMapping("/produtos/{id}")
-		public ResponseEntity<ProdutoDTO> findOne(@PathVariable(name="id") Integer id) {
+		@GetMapping("/produtos/{codigo}")
+		public ResponseEntity<ProdutoDTO> findOne(@PathVariable(name="codigo") Integer id) {
 			Optional<Produto> p = rep.findById(id);
 			Produto prod = p.orElseThrow(()-> new ResourceNotFoundException(this.notFound("um produto",id+"")));
 			return ResponseEntity.ok().body(prod.toDTO());
