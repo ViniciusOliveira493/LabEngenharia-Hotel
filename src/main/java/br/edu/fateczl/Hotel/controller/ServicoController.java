@@ -43,10 +43,10 @@ public class ServicoController extends Controller<ServicoDTO>{
 	}
 
 	@Override
-	@GetMapping("/servico/{codigo}")
-	public ResponseEntity<ServicoDTO> findOne(@PathVariable(name="codigo") Integer codigo) {
-		Optional<Servico> s = rep.findById(codigo);
-		Servico serv = s.orElseThrow(()-> new ResourceNotFoundException(this.notFound("um serviço",codigo+"")));
+	@GetMapping("/servico/{id}")
+	public ResponseEntity<ServicoDTO> findOne(@PathVariable(name="id") Integer id) {
+		Optional<Servico> s = rep.findById(id);
+		Servico serv = s.orElseThrow(()-> new ResourceNotFoundException(this.notFound("um serviço",id+"")));
 		return ResponseEntity.ok().body(serv.toDTO());
 	}
 

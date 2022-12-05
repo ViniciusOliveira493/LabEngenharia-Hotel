@@ -39,8 +39,8 @@ public class ProdutoServicoDTO implements IDTO<ProdutoServico> {
 		ProdutoServico ps = new ProdutoServico();
 		ps.setQtd(this.qtd);
 		ProdutoServicoID psid = new ProdutoServicoID();
-		psid.setPCodigo(this.pid);
-		psid.setSCodigo(this.sid);
+		psid.setCodigo(this.pid);
+		psid.setId(this.sid);
 		ps.setId(psid);
 		return ps;
 	}

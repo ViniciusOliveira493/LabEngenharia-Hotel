@@ -43,11 +43,11 @@ public class ProdutoServicoController extends Controller<ProdutoServicoDTO>{
 			return prse;
 		}
 
-		@GetMapping("/produtoservico/{id}/{Codigo}")
-		public ResponseEntity<ProdutoServicoDTO> findOne(@PathVariable(name="id") Integer p,@PathVariable(name="codigo") Integer s) {
+		@GetMapping("/produtoservico/{codigo}/{id}")
+		public ResponseEntity<ProdutoServicoDTO> findOne(@PathVariable(name="codigo") Integer p,@PathVariable(name="id") Integer s) {
 			ProdutoServicoID id = new ProdutoServicoID();
-			id.setPCodigo(p);
-			id.setSCodigo(s);
+			id.setCodigo(p);
+			id.setId(s);
 			Optional<ProdutoServico> prsv = rep.findById(id);
 			ProdutoServico ps = prsv.orElseThrow(()-> new ResourceNotFoundException(notFound("um produto no serviço "+p, s+"")));
 			return ResponseEntity.ok().body(ps.toDTO());

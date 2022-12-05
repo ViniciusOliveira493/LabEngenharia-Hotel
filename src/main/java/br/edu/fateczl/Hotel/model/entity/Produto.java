@@ -26,8 +26,8 @@ public class Produto implements IEntity<ProdutoDTO>{
 	private String nome;
 
 	@ManyToOne(targetEntity = UnidadeDeMedida.class, fetch = FetchType.LAZY)
-	@JoinColumn(name = "id", nullable = false)
-	private UnidadeDeMedida UdM;
+	@JoinColumn(name = "id", nullable = true)
+	private UnidadeDeMedida id;
 
 	@Column(name = "valor", nullable = false)
 	private Double valor;
@@ -51,12 +51,14 @@ public class Produto implements IEntity<ProdutoDTO>{
 		this.nome = nome;
 	}
 
-	public UnidadeDeMedida getUdM() {
-		return UdM;
+
+
+	public UnidadeDeMedida getId() {
+		return id;
 	}
 
-	public void setUdM(UnidadeDeMedida udM) {
-		UdM = udM;
+	public void setId(UnidadeDeMedida id) {
+		this.id = id;
 	}
 
 	public Double getValor() {
@@ -80,7 +82,7 @@ public class Produto implements IEntity<ProdutoDTO>{
 		ProdutoDTO dto = new ProdutoDTO();
 		dto.setCodigo(this.codigo);
 		dto.setNome(this.nome);
-		dto.setUdM(this.UdM.toDTO());
+		dto.setId(this.id.toDTO());
 		dto.setValor(this.valor);
 		dto.setConteudo(this.conteudo);
 		return dto;
