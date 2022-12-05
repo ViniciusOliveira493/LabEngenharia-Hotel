@@ -1,49 +1,55 @@
 package br.edu.fateczl.Hotel.model.entity;
 
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import com.jayway.jsonpath.ParseContext;
 
 import br.edu.fateczl.Hotel.model.dto.ReservaDTO;
 import br.edu.fateczl.Hotel.model.entity.interfaces.IEntity;
 
 @Entity
 @Table(name = "tbReserva")
-
 public class Reserva implements IEntity<ReservaDTO> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-
-	@JoinColumn(name = "datainicio", nullable = false)
+	@Column(name = "id", nullable = false)
+	private Long id;
+	
+	@Column(name = "datainicio", nullable = false)
 	private String dataInicio;
 
 	@Column(name = "datafim", nullable = false)
 	private String dataFim;
 
-	@Column(name = "documento", length = 20, nullable = false)
-	private PessoaID documento;
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumns({
+	  @JoinColumn(name = "documento", nullable = false),
+	  @JoinColumn(name = "tipoDocumento", nullable = false)
+	})
+	private Pessoa cliente;
 
-	@Column(name = "tipodocumento", length = 10, nullable = false)
-	private PessoaID tipoDocumento;
+	@ManyToOne(targetEntity = Quarto.class, fetch = FetchType.LAZY)
+	@JoinColumn(name = "quartoId", nullable = false)	
+	private Quarto quarto;
 
-	@Column(name = "quartoID", nullable = true)
-	private QuartoID quartoID;
-
-	@Column(name = "vagaEstacionamento", nullable = true)
-	private VagaId vagaEstacionamento;
-
-	@Column(name = "numVaga", nullable = true)
-	private VagaId numVaga;
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumns({
+	  @JoinColumn(name = "vaga", nullable = false),
+	  @JoinColumn(name = "tipoVaga", nullable = false)
+	})
+	private Vaga vaga;
 
 	public String getDataInicio() {
 		return dataInicio;
@@ -61,44 +67,20 @@ public class Reserva implements IEntity<ReservaDTO> {
 		this.dataFim = dataFim;
 	}
 
-	public PessoaID getDocumento() {
-		return documento;
+	public Quarto getQuarto() {
+		return quarto;
 	}
 
-	public void setDocumento(PessoaID documento) {
-		this.documento = documento;
+	public void setQuarto(Quarto quarto) {
+		this.quarto = quarto;
 	}
 
-	public PessoaID getTipoDocumento() {
-		return tipoDocumento;
+	public Vaga getVaga() {
+		return vaga;
 	}
 
-	public void setTipoDocumento(PessoaID tipoDocumento) {
-		this.tipoDocumento = tipoDocumento;
-	}
-
-	public QuartoID getQuartoID() {
-		return quartoID;
-	}
-
-	public void setQuartoID(QuartoID quartoID) {
-		this.quartoID = quartoID;
-	}
-
-	public VagaId getVagaEstacionamento() {
-		return vagaEstacionamento;
-	}
-
-	public void setVagaEstacionamento(VagaId vagaEstacionamento) {
-		this.vagaEstacionamento = vagaEstacionamento;
-	}
-
-	public VagaId getNumVaga() {
-		return numVaga;
-	}
-
-	public void setNumVaga(VagaId numVaga) {
-		this.numVaga = numVaga;
+	public void setVaga(Vaga vaga) {
+		this.vaga = vaga;
 	}
 
 	public void converterDataInicio(String d_inicio) {
@@ -111,16 +93,30 @@ public class Reserva implements IEntity<ReservaDTO> {
 		LocalDateTime dt = LocalDateTime.parse(d_fim, formatter);
 	}
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Pessoa getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Pessoa cliente) {
+		this.cliente = cliente;
+	}
+
 	@Override
 	public ReservaDTO toDTO() {
 		ReservaDTO dto = new ReservaDTO();
-		dto.setDocumento(this.documento);
-		dto.setQuartoID(this.quartoID);
-		dto.setTipoDocumento(this.tipoDocumento);
-		dto.setVagaEstacionamento(this.vagaEstacionamento);
+		dto.setDocumento(this.cliente);
+		dto.setQuarto(this.quarto);
 		dto.setDataInicio(this.dataInicio);
 		dto.setDataFim(this.dataFim);
-		dto.setNumVaga(this.numVaga);
+		dto.setVaga(this.vaga);
 		return dto;
 	}
 

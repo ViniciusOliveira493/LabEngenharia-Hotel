@@ -1,5 +1,6 @@
 package br.edu.fateczl.Hotel.controller;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -20,14 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.fateczl.Hotel.controller.interfaces.Controller;
 import br.edu.fateczl.Hotel.model.dto.ReservaDTO;
-import br.edu.fateczl.Hotel.model.dto.ServicoDTO;
-import br.edu.fateczl.Hotel.model.entity.PessoaID;
-import br.edu.fateczl.Hotel.model.entity.QuartoID;
 import br.edu.fateczl.Hotel.model.entity.Reserva;
-import br.edu.fateczl.Hotel.model.entity.ReservaID;
-import br.edu.fateczl.Hotel.model.entity.Servico;
 import br.edu.fateczl.Hotel.repository.ReservaRepository;
-import br.edu.fateczl.Hotel.repository.ServicoRepository;
 
 @RestController
 @RequestMapping("/api")
@@ -48,19 +43,23 @@ public class ReservaController extends Controller<ReservaDTO>{
 		return res;
 	}
 
-	@GetMapping("/reserva/{reservaID}")
-	public ResponseEntity<ReservaDTO> findOne(@PathVariable(name="documento") PessoaID doc, @PathVariable(name="tipodocumento") PessoaID tipoDoc,
-			@PathVariable(name="quartoid") QuartoID qID, @PathVariable(name="dataInicio") String dataInicio) {
-		ReservaID id = new ReservaID();
-		id.setDocumento(doc);
-		id.setQuartoID(qID);
-		id.setTipoDocumento(tipoDoc);
-		id.setDataInicio(dataInicio);
-;		Optional<Reserva> s = rep.findById(id);
+	@GetMapping("/reserva/{reservaId}")
+	public ResponseEntity<ReservaDTO> findOne(@PathVariable(name="reservaId") BigInteger id) {
+		Optional<Reserva> s = rep.findById(id);
+		Reserva res = s.orElseThrow(()-> new ResourceNotFoundException(this.notFound("uma reserva",id+"")));
+		return ResponseEntity.ok().body(res.toDTO());
+	}
+	
+	@GetMapping("/reserva/{documento}/{tipodocumento}/{quartoid}/{dataInicio}")
+	public ResponseEntity<ReservaDTO> findOne(@PathVariable(name="documento") String doc, 
+												@PathVariable(name="tipodocumento") int tipoDoc,
+												 @PathVariable(name="quartoid") BigInteger id, 
+												 	@PathVariable(name="dataInicio") String dataInicio) {
+		Optional<Reserva> s = rep.findById(id);
 		Reserva res = s.orElseThrow(()-> new ResourceNotFoundException(this.notFound("um serviço",id+"")));
 		return ResponseEntity.ok().body(res.toDTO());
 	}
-
+	
 	@Override
 	@PostMapping("/reserva/")
 	public ResponseEntity<String> insert(@Valid @RequestBody ReservaDTO obj) {

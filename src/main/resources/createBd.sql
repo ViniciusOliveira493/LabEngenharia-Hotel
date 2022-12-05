@@ -7,7 +7,7 @@ GO
 
 INSERT INTO tbTipoDocumento(nomeTipo)
     VALUES
-        ,('CPF')
+        ('CPF')
         , ('ITIN number')
         
 INSERT INTO tbTipoVaga(tipo)
