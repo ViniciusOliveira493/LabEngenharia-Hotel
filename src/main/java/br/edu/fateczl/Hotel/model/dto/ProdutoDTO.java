@@ -55,6 +55,8 @@ public class ProdutoDTO implements IDTO<Produto> {
 	public Produto toEntity() {
 		Produto p = new Produto();
 		p.setCodigo(this.id);
+		p.setValor(this.valor);
+		p.setConteudo(this.conteudo);
 		p.setNome(this.nome);
 		p.setUdM(this.UdM.toEntity());
 		return p;
