@@ -45,8 +45,8 @@ public class Reserva implements IEntity<ReservaDTO> {
 
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumns({
-	  @JoinColumn(name = "vaga", nullable = false),
-	  @JoinColumn(name = "tipoVaga", nullable = false)
+	  @JoinColumn(name = "estacionamento", nullable = true),
+	  @JoinColumn(name = "numvaga", nullable = true)
 	})
 	private Vaga vaga;
 

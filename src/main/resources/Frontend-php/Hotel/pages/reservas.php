@@ -12,24 +12,27 @@
                 <div class="row border">
                     <div class="col-3">
                         <div class="input-group mb-3">   
-                            <div class="input-group mb-3">  
-                                <div class="input-group-append">
-                                    <label for="slTipoDocumento">Tipo de Documento:</label>
-                                    <select class="form-control" id="selectTipoDocumentoBusca">
-                                        <option>Selecione um tipo de documento</option>                                    
-                                    </select>     
-                                </div>  
-                                <div class="form-group">
-                                    <label for="txtDocumentoCliente">Documento:</label>
-                                    <input type="text" class="form-control" id="txtDocumentoClienteBusca" placeholder="Digite o numero do estacionamento">
-                                </div>
-                                <div class="input-group mt-2">
-                                    <input type="date" id="txtDataReserva" class="form-control " placeholder="buscar usuário" aria-label="buscar usuário" aria-describedby="button-addon2">
+                            <div class="input-group mb-3"> 
+                                <div id="pesquisaCliente" class="d-none">
                                     <div class="input-group-append">
-                                        <button class="btn btn-outline-secondary" type="button" id="btnBuscarReservaUser">Buscar</button>
+                                        <label for="slTipoDocumento">Tipo de Documento:</label>
+                                        <select class="form-control" id="selectTipoDocumentoBusca">
+                                            <option>Selecione um tipo de documento</option>                                    
+                                        </select>     
                                     </div>  
+                                    <div class="form-group">
+                                        <label for="txtDocumentoCliente">Documento:</label>
+                                        <input type="text" class="form-control" id="txtDocumentoClienteBusca" placeholder="Digite o numero do estacionamento">
+                                    </div>
+                                    <div class="input-group mt-2">
+                                        <input type="date" id="txtDataReserva" class="form-control " placeholder="buscar usuário" aria-label="buscar usuário" aria-describedby="button-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary" type="button" id="btnBuscarReservaUser">Buscar</button>
+                                        </div>  
+                                    </div> 
+                                    <p class="text-center col-12">OU</p>
                                 </div> 
-                                <p class="text-center col-12">OU</p>
+                               
                                 <div class="input-group">
                                     <input type="number" id="txtCodigoReserva" class="form-control " placeholder="Código da reserva" aria-label="buscar usuário" aria-describedby="button-addon2">
                                     <div class="input-group-append">
@@ -82,12 +85,22 @@
                                 </select>     
                             </div>  
                             <div class="input-group-append">
-                                <label for="select Quarto">Quarto</label>
+                                <label for="select Quarto">Quarto:</label>
                                 <select class="form-control" id="selectQuarto">
                                     <option>Selecione um Quarto disponível:</option>                                    
                                 </select>     
                             </div>
-                             // Vagas
+                            <div class="input-group-append">
+                                <label for="select Vaga">Vaga:</label>
+                                <select class="form-control" id="selectTipoVaga">
+                                    <option>Selecione um tipo de vaga</option>                                    
+                                </select>  
+                            </div>
+                            <div class="input-group-append mt-2">
+                                <select class="form-control" id="selectVaga">
+                                    <option>Selecione uma vaga disponível:</option>                                    
+                                </select>     
+                            </div>
                         </form>
                     </div>
                 </div>
