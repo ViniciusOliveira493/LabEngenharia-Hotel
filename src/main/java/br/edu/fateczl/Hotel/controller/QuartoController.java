@@ -41,6 +41,18 @@ public class QuartoController extends Controller<QuartoDTO>{
 		return qt;
 	}
 
+	@GetMapping("/quartosdisp/{data}/{tipo}")
+	public List<QuartoDTO> findDisponiveis(@PathVariable(name="data") String data,
+			@PathVariable(name="tipo") int tipo) {
+		List<Quarto> quartos = rep.buscarQuartosDisponiveis(data, tipo);
+		List<QuartoDTO> qt = new ArrayList<>();
+		
+		for(Quarto q:quartos) {
+			qt.add(q.toDTO());
+		}
+		return qt;
+	}
+	
 	@GetMapping("/quartos/{id}")
 	public ResponseEntity<QuartoDTO> findOne(@PathVariable(name="id") Long i) {
 		Optional<Quarto> quarto = rep.findById(i);
