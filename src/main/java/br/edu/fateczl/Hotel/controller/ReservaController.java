@@ -56,7 +56,20 @@ public class ReservaController extends Controller<ReservaDTO>{
 	public List<ReservaDTO> findData(@PathVariable(name="documento") String doc, 
 												@PathVariable(name="tipodocumento") int tipoDoc, 
 												 	@PathVariable(name="dataInicio") String dataInicio) {
-		List<Reserva> reserva = rep.buscarDisponiveis(tipoDoc, doc, dataInicio);
+		List<Reserva> reserva = rep.buscarData(tipoDoc, doc, dataInicio);
+		List<ReservaDTO> res =  new ArrayList<>();
+		
+		for(Reserva re: reserva) {
+			res.add(re.toDTO());
+		}		
+		return res;
+	}
+	
+	@GetMapping("/reservaData/{documento}/{tipodocumento}/{dataInicio}")
+	public List<ReservaDTO> findReservas(@PathVariable(name="documento") String doc, 
+												@PathVariable(name="tipodocumento") int tipoDoc, 
+												 	@PathVariable(name="dataInicio") String dataInicio) {
+		List<Reserva> reserva = rep.buscarReservas(tipoDoc, doc, dataInicio);
 		List<ReservaDTO> res =  new ArrayList<>();
 		
 		for(Reserva re: reserva) {

@@ -156,7 +156,7 @@ getElementById("btnBuscarReservaUser").addEventListener("click",function(){
 
     getElementById('listaReservas').innerHTML = "";
     $.ajax({
-		url : urlbase+'reserva/'+limparDocumento(doc)+'/'+tipoDoc+'/'+data,
+		url : urlbase+'reservaData/'+limparDocumento(doc)+'/'+tipoDoc+'/'+data,
 		contentType: "application/json",
 		type : "GET",
 		data : ''

@@ -51,6 +51,8 @@ BEGIN
     WHERE 
         q.id = r.quartoId AND q.tipo = @tipo
         AND 
+        @data != r.datainicio
+        AND
         @data NOT BETWEEN r.datainicio and r.datafim
     UNION
     SELECT TOP(20)
@@ -80,6 +82,8 @@ BEGIN
     FROM tbVaga AS v,tbReserva as r 
     WHERE 
         v.estacionamento = r.estacionamento AND v.numVaga = r.numVaga
+        AND 
+        @data != r.datainicio
         AND
         @data NOT BETWEEN r.datainicio and r.datafim
         AND v.tipo = @tipo

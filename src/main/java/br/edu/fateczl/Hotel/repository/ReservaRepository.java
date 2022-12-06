@@ -20,5 +20,16 @@ public interface ReservaRepository extends JpaRepository<Reserva, BigInteger>{
 					+ " datainicio = ?3"
 			,nativeQuery = true
 	)
-	public List<Reserva> buscarDisponiveis(int tdoc,String doc,String data);
+	public List<Reserva> buscarData(int tdoc,String doc,String data);
+	
+	@Query(
+			value = "SELECT "
+					+ "	* "
+					+ " FROM tbReserva"
+					+ " WHERE tipoDocumento = ?1 AND "
+					+ " documento = ?2 AND"
+					+ " datainicio LIKE ?3%"
+			,nativeQuery = true
+	)
+	public List<Reserva> buscarReservas(int tdoc,String doc,String data);
 }
