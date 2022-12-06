@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class Conexao {
 	private String server = "localhost";
 	private String login = "SA";
-	private String senha = "";
+	private String senha = "71.u5.qz";
 	private String bd = "bdHotel";
 	
 	public Connection getConexao() {		
