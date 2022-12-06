@@ -88,13 +88,13 @@
 
                             <div class="form-group">
                                 <label for="formGroupExampleInput">Quarto</label>
-                                <input type="number" min="0" class="form-control" id="txtIdQuarto" placeholder="Digite o código da vaga">
+                                <input type="number" min="0" class="form-control" id="txtIdQuarto" placeholder="Digite o código do quarto">
                             </div>
 
                             <div class="mt-3">
                                 <div class="form-group">
                                     <label for="Nome">Prédio:</label>
-                                    <input type="text" class="form-control" id="txtDescricao" aria-describedby="emailHelp" placeholder="Prédio">
+                                    <input type="text" class="form-control" id="txtPredio" aria-describedby="emailHelp" placeholder="Prédio">
                                 </div>
                             </div>
                             <div class="input-group-append">
@@ -135,7 +135,7 @@
             <?php 
                 include_once("js/ferramentas/metodosDeApoio.js");
                 include_once("js/paginas/nav.js");
-                include_once("js/paginas/crudVagas.js");
+                include_once("js/paginas/crudQuartos.js");
             ?>
         </script>
     </body>
