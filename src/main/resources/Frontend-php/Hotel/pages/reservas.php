@@ -53,7 +53,7 @@
                             }
                         </style>
                         <div class="input-group mb-3 overflow-auto lista">
-                            <ul class="list-group col-12" id="listaVagas">
+                            <ul class="list-group col-12" id="listaReservas">
                                 
                             </ul>
                         </div>

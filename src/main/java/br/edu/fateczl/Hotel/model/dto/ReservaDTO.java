@@ -1,5 +1,7 @@
 package br.edu.fateczl.Hotel.model.dto;
 
+import java.math.BigInteger;
+
 import br.edu.fateczl.Hotel.model.dto.interfaces.IDTO;
 import br.edu.fateczl.Hotel.model.entity.Pessoa;
 import br.edu.fateczl.Hotel.model.entity.Quarto;
@@ -7,11 +9,21 @@ import br.edu.fateczl.Hotel.model.entity.Reserva;
 import br.edu.fateczl.Hotel.model.entity.Vaga;
 
 public class ReservaDTO implements IDTO<Reserva> {
+	private BigInteger id;
 	private String dataInicio;
 	private String dataFim;
 	private PessoaDTO documento;
 	private QuartoDTO quarto;
 	private VagaDTO vaga;
+
+	
+	public BigInteger getId() {
+		return id;
+	}
+
+	public void setId(BigInteger id) {
+		this.id = id;
+	}
 
 	public VagaDTO getVaga() {
 		return vaga;
@@ -63,6 +75,7 @@ public class ReservaDTO implements IDTO<Reserva> {
 	@Override
 	public Reserva toEntity() {
 		Reserva r = new Reserva();
+		r.setId(this.id);
 		r.setCliente(this.documento.toEntity());
 		r.setVaga(this.vaga.toEntity());
 		r.setQuarto(this.quarto.toEntity());

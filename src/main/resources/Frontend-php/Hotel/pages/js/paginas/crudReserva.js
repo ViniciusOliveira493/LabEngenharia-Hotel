@@ -119,6 +119,81 @@ getElementById("btnCancelarReserva").addEventListener("click",function(){
 	});
 });
 
+getElementById("btnBuscarReservaCod").addEventListener("click",function(){
+    var codigo = getValueById('txtCodigoReserva');
+    getElementById('listaReservas').innerHTML = "";
+    $.ajax({
+		url : urlbase+'reserva/'+codigo,
+		contentType: "application/json",
+		type : "GET",
+		data : ''
+	})
+	.done(function(msg){
+        if(Array.isArray(msg)){
+            msg.forEach(f => {
+                getElementById('listaReservas').append(criarItemReserva(f));
+            }); 
+        }else{
+            getElementById('listaReservas').append(criarItemReserva(msg));
+        }
+              
+	})
+	.fail(function(jqXHR, textStatus, msg){
+		console.log(msg);
+	});
+});
+
+function criarItemReserva(dados){
+    var item = document.createElement('li');
+    item.setAttribute("class","list-group-item")
+    item.setAttribute("onclick","abrirReserva('"+dados.id+"')")
+    item.append(dados.dataInicio + " | quarto:"+dados.quarto.id)
+    return item;
+}
+
+function abrirReserva(id){
+    $.ajax({
+		url : urlbase+'reserva/'+id,
+		contentType: "application/json",
+		type : "GET",
+		data : ''
+	})
+	.done(function(msg){
+        carregarReserva(msg);
+	})
+	.fail(function(jqXHR, textStatus, msg){
+		console.log(msg);
+	});
+}
+
+function carregarReserva(reserva){
+    dados = JSON.stringify(reserva);
+    dados = JSON.parse(dados);
+    console.log(dados.vaga)
+    getElementById('selectTipoDocumentoForm').value = dados.documento.id.tipoDocumento.id
+    getElementById('txtDocumentoClienteForm').value = dados.documento.id.documento
+    getElementById('dataInicioReserva').value = dados.dataInicio
+    getElementById('dataFimReserva').value = dados.dataFim
+    getElementById('slTipoQuarto').value = dados.quarto.tipo.id
+    getElementById('selectQuarto').innerHTML = "";
+    getElementById('selectQuarto').append(criarOptionQuarto(dados.quarto));
+
+    if(dados.vaga != null){
+        getElementById('selectTipoVaga').value = dados.vaga.tipo.id;
+        getElementById('selectVaga').innerHTML = "";
+        getElementById('selectVaga').append(criarOptionVaga(dados.vaga));
+    }
+
+    getElementById('selectTipoDocumentoForm').disabled = true;
+    getElementById('txtDocumentoClienteForm').disabled = true;
+    getElementById('dataInicioReserva').disabled = true;
+    getElementById('dataFimReserva').disabled = true;
+    getElementById('slTipoQuarto').disabled = true;
+    getElementById('selectQuarto').disabled = true;
+    getElementById('selectTipoVaga').disabled = true;
+    getElementById('selectVaga').disabled = true;
+}
+
 function criarOptionVaga(opcao){
     return new Option('Estacionamento:'+opcao.estacionamento +' Vaga: '+opcao.numVaga,opcao.numVaga+"|"+opcao.estacionamento);
 }

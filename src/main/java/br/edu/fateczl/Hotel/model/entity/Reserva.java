@@ -1,5 +1,6 @@
 package br.edu.fateczl.Hotel.model.entity;
 
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -24,7 +25,7 @@ public class Reserva implements IEntity<ReservaDTO> {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false)
-	private Long id;
+	private BigInteger id;
 	
 	@Column(name = "datainicio", nullable = false)
 	private String dataInicio;
@@ -92,11 +93,11 @@ public class Reserva implements IEntity<ReservaDTO> {
 		LocalDateTime dt = LocalDateTime.parse(d_fim, formatter);
 	}
 
-	public Long getId() {
+	public BigInteger getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(BigInteger id) {
 		this.id = id;
 	}
 
@@ -112,6 +113,7 @@ public class Reserva implements IEntity<ReservaDTO> {
 	public ReservaDTO toDTO() {
 		ReservaDTO dto = new ReservaDTO();
 		dto.setDocumento(this.cliente);
+		dto.setId(this.id);
 		dto.setQuarto(this.quarto);
 		dto.setDataInicio(this.dataInicio);
 		dto.setDataFim(this.dataFim);
