@@ -32,7 +32,7 @@ public class ProdutoServicoController extends Controller<ProdutoServicoDTO>{
 		ProdutoServicoRepository rep;
 		
 		@Override
-		@GetMapping("/produtoservico/")
+		@GetMapping("/produtoservico")
 		public List<ProdutoServicoDTO> findAll() {
 			List<ProdutoServico> produtoservico = rep.findAll();
 			List<ProdutoServicoDTO> prse = new ArrayList<>();
