@@ -87,13 +87,13 @@
                             <div class="input-group-append">
                                 <label for="select Quarto">Quarto:</label>
                                 <select class="form-control" id="selectQuarto">
-                                    <option>Selecione um Quarto disponível:</option>                                    
+                                    <option value="0">Selecione um Quarto disponível:</option>                                    
                                 </select>     
                             </div>
                             <div class="input-group-append">
                                 <label for="select Vaga">Vaga:</label>
                                 <select class="form-control" id="selectTipoVaga">
-                                    <option>Selecione um tipo de vaga</option>                                    
+                                    <option value="0">Selecione um tipo de vaga</option>                                    
                                 </select>  
                             </div>
                             <div class="input-group-append mt-2">

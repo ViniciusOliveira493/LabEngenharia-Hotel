@@ -76,7 +76,7 @@ function carregarTiposQuarto(selectIds){
         selectIds.forEach(e =>{
           let select = document.getElementById(e);
           msg.forEach(f => {
-            getElementById(e).append(criarOptionQuarto(f));
+            getElementById(e).append(criarOptionTipoQuarto(f));
           });
         });		
 	})
@@ -85,7 +85,7 @@ function carregarTiposQuarto(selectIds){
 	});
 }
 
-function criarOptionQuarto(opcao){
+function criarOptionTipoQuarto(opcao){
   return new Option(opcao.tipo,opcao.id)
 }
 /* Seleção do tipo de vaga*/

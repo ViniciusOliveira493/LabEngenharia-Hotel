@@ -29,6 +29,10 @@ insert into tbQuarto(andar,numero,predio,tipo)
   		, (0,4,1,1)
         , (0,5,1,2)
  
+INSERT INTO tbUnidadeDeMedida(nome)
+    VALUES
+        ('Grama')
+        ,('Litro')
 --=================== FUNCTIONS PARA BUSCAR QUARTOS E VAGAS DISPONÍVEIS ====
 GO
 --===================FN Quartos
