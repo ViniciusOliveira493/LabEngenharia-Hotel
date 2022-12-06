@@ -23,6 +23,7 @@ import br.edu.fateczl.Hotel.controller.interfaces.Controller;
 import br.edu.fateczl.Hotel.model.dto.ReservaDTO;
 import br.edu.fateczl.Hotel.model.entity.Reserva;
 import br.edu.fateczl.Hotel.repository.ReservaRepository;
+import br.edu.fateczl.Hotel.repository.reservaCustom.ReservaCustomRep;
 
 @RestController
 @RequestMapping("/api")
@@ -30,6 +31,7 @@ public class ReservaController extends Controller<ReservaDTO>{
 	@Autowired
 	ReservaRepository rep;
 	
+	ReservaCustomRep rcr = new ReservaCustomRep();
 	@Override
 	@GetMapping("/reserva")
 	public List<ReservaDTO> findAll() {
@@ -61,23 +63,23 @@ public class ReservaController extends Controller<ReservaDTO>{
 	}
 	
 	@Override
-	@PostMapping("/reserva/")
+	@PostMapping("/reserva")
 	public ResponseEntity<String> insert(@Valid @RequestBody ReservaDTO obj) {
-		rep.save(obj.toEntity());
+		System.err.println(obj.toString());
+		rcr.criarReserva(obj);
 		return ResponseEntity.ok().body(this.sucesso(1));
 	}
 
 	@Override
-	@PutMapping("/reserva/")
+	@PutMapping("/reserva")
 	public ResponseEntity<String> update(@Valid @RequestBody ReservaDTO obj) {
-		rep.save(obj.toEntity());
-		return ResponseEntity.ok().body(this.sucesso(2));
+		return ResponseEntity.ok().body("A atualização não é permitida para reservas");
 	}
 
 	@Override
-	@DeleteMapping("/reserva/")
+	@DeleteMapping("/reserva")
 	public ResponseEntity<String> delete(ReservaDTO obj) {
-		rep.delete(obj.toEntity());
+		rcr.cancelarReserva(obj);
 		return ResponseEntity.ok().body(this.sucesso(3));
 	}
 

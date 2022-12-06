@@ -83,12 +83,12 @@ public class Reserva implements IEntity<ReservaDTO> {
 	}
 
 	public void converterDataInicio(String d_inicio) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/mm/yyyy");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 		LocalDateTime dt = LocalDateTime.parse(d_inicio, formatter);
 	}
 	
 	public void converterDataFim(String d_fim) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/mm/yyyy");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 		LocalDateTime dt = LocalDateTime.parse(d_fim, formatter);
 	}
 
@@ -115,7 +115,9 @@ public class Reserva implements IEntity<ReservaDTO> {
 		dto.setQuarto(this.quarto);
 		dto.setDataInicio(this.dataInicio);
 		dto.setDataFim(this.dataFim);
-		dto.setVaga(this.vaga);
+		if(this.vaga != null) {
+			dto.setVaga(this.vaga);
+		}		
 		return dto;
 	}
 

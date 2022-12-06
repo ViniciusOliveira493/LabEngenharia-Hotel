@@ -98,8 +98,12 @@
                             </div>
                             <div class="input-group-append mt-2">
                                 <select class="form-control" id="selectVaga">
-                                    <option>Selecione uma vaga disponível:</option>                                    
+                                    <option value="0">Selecione uma vaga disponível:</option>                                   
                                 </select>     
+                            </div>
+                            <div class="input-group-append mt-4">
+                                <button id = "btnCadReserva" type="button" class="btn btn-success btn-lg btn-block">Realizar Reserva </button>
+                                <button id = "btnCancelarReserva" type="button" class="btn btn-danger btn-lg btn-block">Cancelar Reserva</button>
                             </div>
                         </form>
                     </div>

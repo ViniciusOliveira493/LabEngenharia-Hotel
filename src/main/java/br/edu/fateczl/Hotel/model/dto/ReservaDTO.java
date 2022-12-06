@@ -9,16 +9,16 @@ import br.edu.fateczl.Hotel.model.entity.Vaga;
 public class ReservaDTO implements IDTO<Reserva> {
 	private String dataInicio;
 	private String dataFim;
-	private Pessoa documento;
-	private Quarto quarto;
-	private Vaga vaga;
+	private PessoaDTO documento;
+	private QuartoDTO quarto;
+	private VagaDTO vaga;
 
-	public Vaga getVaga() {
+	public VagaDTO getVaga() {
 		return vaga;
 	}
 
 	public void setVaga(Vaga numVaga) {
-		this.vaga = numVaga;
+		this.vaga = numVaga.toDTO();
 	}
 
 	public String getDataInicio() {
@@ -37,28 +37,35 @@ public class ReservaDTO implements IDTO<Reserva> {
 		this.dataFim = dataFim;
 	}
 
-	public Pessoa getDocumento() {
+	public PessoaDTO getDocumento() {
 		return documento;
 	}
 
 	public void setDocumento(Pessoa documento) {
-		this.documento = documento;
+		this.documento = documento.toDTO();
 	}
 
-	public Quarto getQuarto() {
+	public QuartoDTO getQuarto() {
 		return quarto;
 	}
 
 	public void setQuarto(Quarto quarto) {
-		this.quarto = quarto;
+		this.quarto = quarto.toDTO();
+	}
+
+	
+	@Override
+	public String toString() {
+		return "ReservaDTO [dataInicio=" + dataInicio + ", dataFim=" + dataFim + ", documento=" + documento
+				+ ", quarto=" + quarto + ", vaga=" + vaga + "]";
 	}
 
 	@Override
 	public Reserva toEntity() {
 		Reserva r = new Reserva();
-		r.setCliente(this.documento);
-		r.setVaga(this.vaga);
-		r.setQuarto(this.quarto);
+		r.setCliente(this.documento.toEntity());
+		r.setVaga(this.vaga.toEntity());
+		r.setQuarto(this.quarto.toEntity());
 		r.converterDataFim(this.dataFim);
 		r.converterDataInicio(this.dataInicio);
 		r.setDataFim(this.dataFim);

@@ -50,6 +50,13 @@ public class QuartoDTO implements IDTO<Quarto> {
 		this.numero = numero;
 	}
 
+	
+	@Override
+	public String toString() {
+		return "QuartoDTO [id=" + id + ", tipo=" + tipo + ", predio=" + predio + ", andar=" + andar + ", numero="
+				+ numero + "]";
+	}
+
 	@Override
 	public Quarto toEntity() {
 		Quarto q = new Quarto();

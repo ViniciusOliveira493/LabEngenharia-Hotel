@@ -45,15 +45,22 @@ public class VagaDTO implements IDTO<Vaga>{
 	}
 	
 	@Override
+	public String toString() {
+		return "VagaDTO [estacionamento=" + estacionamento + ", numVaga=" + numVaga + ", descricao=" + descricao
+				+ ", tipo=" + tipo + ", valorDiaria=" + valorDiaria + "]";
+	}
+	@Override
 	public Vaga toEntity() {
 		Vaga v = new Vaga();
-		v.setDescricao(this.descricao);
-		VagaId vid = new VagaId();
-		vid.setEstacionamento(this.estacionamento);
-		vid.setNumVaga(this.numVaga);
-		v.setId(vid);
-		v.setTipo(this.tipo.toEntity());
-		v.setValorDiaria(this.valorDiaria);
+		if(this.estacionamento!=null) {
+			v.setDescricao(this.descricao);
+			VagaId vid = new VagaId();
+			vid.setEstacionamento(this.estacionamento);
+			vid.setNumVaga(this.numVaga);
+			v.setId(vid);
+			v.setTipo(this.tipo.toEntity());
+			v.setValorDiaria(this.valorDiaria);
+		}
 		return v;
 	}
 }

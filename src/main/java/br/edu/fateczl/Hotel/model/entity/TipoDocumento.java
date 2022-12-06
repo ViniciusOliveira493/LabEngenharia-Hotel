@@ -40,6 +40,12 @@ public class TipoDocumento implements IEntity<TipoDocumentoDTO>,Serializable{
 		this.id = id;
 	}
 
+	
+	@Override
+	public String toString() {
+		return "TipoDocumento [id=" + id + ", tipo=" + tipo + "]";
+	}
+
 	public TipoDocumentoDTO toDTO() {
 		TipoDocumentoDTO dto = new TipoDocumentoDTO();
 		dto.setTipo(this.tipo);

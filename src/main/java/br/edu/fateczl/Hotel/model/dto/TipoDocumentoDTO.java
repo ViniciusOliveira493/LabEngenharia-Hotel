@@ -27,6 +27,12 @@ public class TipoDocumentoDTO implements IDTO<TipoDocumento>,Serializable{
 		this.id = id;
 	}
 
+	
+	@Override
+	public String toString() {
+		return "TipoDocumentoDTO [id=" + id + ", tipo=" + tipo + "]";
+	}
+
 	public TipoDocumento toEntity() {
 		TipoDocumento ent = new TipoDocumento();
 		ent.setTipo(this.tipo);

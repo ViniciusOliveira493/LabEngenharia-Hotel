@@ -39,4 +39,11 @@ public class VagaId implements Serializable {
 	public void setNumVaga(int numVaga) {
 		this.numVaga = numVaga;
 	}
+
+	@Override
+	public String toString() {
+		return "VagaId [estacionamento=" + estacionamento + ", numVaga=" + numVaga + "]";
+	}
+	
+	
 }

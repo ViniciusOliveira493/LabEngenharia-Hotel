@@ -36,6 +36,11 @@ public class TipoQuartoDTO implements IDTO<TipoQuarto>, Serializable {
 		this.tipo = tipo;
 	}
 
+	@Override
+	public String toString() {
+		return "TipoQuartoDTO [id=" + id + ", valorDiaria=" + valorDiaria + ", tipo=" + tipo + "]";
+	}
+
 	public TipoQuarto toEntity() {
 		TipoQuarto tq = new TipoQuarto();
 		tq.setId(this.id);
