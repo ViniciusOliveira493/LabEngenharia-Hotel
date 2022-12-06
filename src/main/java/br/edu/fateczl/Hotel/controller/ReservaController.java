@@ -52,14 +52,17 @@ public class ReservaController extends Controller<ReservaDTO>{
 		return ResponseEntity.ok().body(res.toDTO());
 	}
 	
-	@GetMapping("/reserva/{documento}/{tipodocumento}/{quartoid}/{dataInicio}")
-	public ResponseEntity<ReservaDTO> findOne(@PathVariable(name="documento") String doc, 
-												@PathVariable(name="tipodocumento") int tipoDoc,
-												 @PathVariable(name="quartoid") BigInteger id, 
+	@GetMapping("/reserva/{documento}/{tipodocumento}/{dataInicio}")
+	public List<ReservaDTO> findData(@PathVariable(name="documento") String doc, 
+												@PathVariable(name="tipodocumento") int tipoDoc, 
 												 	@PathVariable(name="dataInicio") String dataInicio) {
-		Optional<Reserva> s = rep.findById(id);
-		Reserva res = s.orElseThrow(()-> new ResourceNotFoundException(this.notFound("um serviço",id+"")));
-		return ResponseEntity.ok().body(res.toDTO());
+		List<Reserva> reserva = rep.buscarDisponiveis(tipoDoc, doc, dataInicio);
+		List<ReservaDTO> res =  new ArrayList<>();
+		
+		for(Reserva re: reserva) {
+			res.add(re.toDTO());
+		}		
+		return res;
 	}
 	
 	@Override

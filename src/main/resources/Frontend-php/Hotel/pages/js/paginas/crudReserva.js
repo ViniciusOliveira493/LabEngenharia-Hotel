@@ -6,12 +6,6 @@ var cliente;
 
 window.onload = init();
 function init(){
-    if(user.funcao == 3){
-        getElementById("pesquisaCliente").setAttribute("class","d-none");
-    }else{
-        getElementById("pesquisaCliente").removeAttribute("class","d-none");
-    }
-
     var selects = ['selectTipoDocumentoBusca','selectTipoDocumentoForm'];
     carregarTiposDocumento(selects);
 
@@ -20,6 +14,12 @@ function init(){
 
     var selectTipoVaga = ['selectTipoVaga'];
     carregarTiposVaga(selectTipoVaga);
+    
+    if(user.funcao == 3){
+        getElementById("pesquisaCliente").setAttribute("class","d-none");
+    }else{
+        getElementById("pesquisaCliente").removeAttribute("class","d-none");
+    }   
 }
 
 getElementById("selectTipoDocumentoBusca").addEventListener("change",function(){
@@ -143,6 +143,39 @@ getElementById("btnBuscarReservaCod").addEventListener("click",function(){
 	});
 });
 
+getElementById("btnBuscarReservaUser").addEventListener("click",function(){
+    var tipoDoc = getValueById('selectTipoDocumentoBusca');
+    var doc = getValueById('txtDocumentoClienteBusca');
+    var data = getValueById('txtDataReserva');
+    data = data.replace('T',' ');
+
+    if(user.funcao == 3){
+        tipoDoc = user.id.tipoDocumento.id;
+        doc = user.id.documento;
+    }
+
+    getElementById('listaReservas').innerHTML = "";
+    $.ajax({
+		url : urlbase+'reserva/'+limparDocumento(doc)+'/'+tipoDoc+'/'+data,
+		contentType: "application/json",
+		type : "GET",
+		data : ''
+	})
+	.done(function(msg){
+        if(Array.isArray(msg)){
+            msg.forEach(f => {
+                getElementById('listaReservas').append(criarItemReserva(f));
+            }); 
+        }else{
+            getElementById('listaReservas').append(criarItemReserva(msg));
+        }
+              
+	})
+	.fail(function(jqXHR, textStatus, msg){
+		console.log(msg);
+	});
+});
+
 function criarItemReserva(dados){
     var item = document.createElement('li');
     item.setAttribute("class","list-group-item")
@@ -167,9 +200,13 @@ function abrirReserva(id){
 }
 
 function carregarReserva(reserva){
+    getElementById('selectQuarto').innerHTML = "";
+    getElementById('selectTipoVaga').value = 0;
+    getElementById('selectVaga').innerHTML = "";
+
     dados = JSON.stringify(reserva);
     dados = JSON.parse(dados);
-    console.log(dados.vaga)
+
     getElementById('selectTipoDocumentoForm').value = dados.documento.id.tipoDocumento.id
     getElementById('txtDocumentoClienteForm').value = dados.documento.id.documento
     getElementById('dataInicioReserva').value = dados.dataInicio

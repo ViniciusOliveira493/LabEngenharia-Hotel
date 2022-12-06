@@ -24,6 +24,7 @@
                                         <label for="txtDocumentoCliente">Documento:</label>
                                         <input type="text" class="form-control" id="txtDocumentoClienteBusca" placeholder="Digite o numero do estacionamento">
                                     </div>
+                                </div> 
                                     <div class="input-group mt-2">
                                         <input type="date" id="txtDataReserva" class="form-control " placeholder="buscar usuário" aria-label="buscar usuário" aria-describedby="button-addon2">
                                         <div class="input-group-append">
@@ -31,7 +32,7 @@
                                         </div>  
                                     </div> 
                                     <p class="text-center col-12">OU</p>
-                                </div> 
+                                
                                
                                 <div class="input-group">
                                     <input type="number" id="txtCodigoReserva" class="form-control " placeholder="Código da reserva" aria-label="buscar usuário" aria-describedby="button-addon2">
