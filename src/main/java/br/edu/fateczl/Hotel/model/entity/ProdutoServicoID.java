@@ -3,7 +3,6 @@ package br.edu.fateczl.Hotel.model.entity;
 import java.io.Serializable;
 
 import javax.persistence.FetchType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
@@ -14,36 +13,38 @@ public class ProdutoServicoID implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public ProdutoServicoID(Integer PCodigo, Integer SCodigo) {
-		this.PCodigo = PCodigo;
-		this.SCodigo = SCodigo;
+	public ProdutoServicoID(Integer codigo, Integer id) {
+		this.codigo = codigo;
+		this.id = id;
 	}
 	
 	
 	
 	@ManyToOne(targetEntity = Produto.class, fetch = FetchType.EAGER)
-	@JoinColumn(name = "id", nullable = false)
-	private Integer PCodigo;
+	@JoinColumn(name = "codigo", nullable = false)
+	private Integer codigo;
 	
 	
 	@ManyToOne(targetEntity = Servico.class, fetch = FetchType.EAGER)
-	@JoinColumn(name = "codigo", nullable = false)
-	private Integer SCodigo;
+	@JoinColumn(name = "id", nullable = false)
+	private Integer id;
 
-	public Integer getPCodigo() {
-		return PCodigo;
+	public Integer getCodigo() {
+		return codigo;
 	}
 
-	public void setPCodigo(Integer pCodigo) {
-		PCodigo = pCodigo;
+	public void setCodigo(Integer codigo) {
+		this.codigo = codigo;
 	}
 
-	public Integer getSCodigo() {
-		return SCodigo;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setSCodigo(Integer sCodigo) {
-		SCodigo = sCodigo;
+	public void setId(Integer id) {
+		this.id = id;
 	}
+
+	
 
 }

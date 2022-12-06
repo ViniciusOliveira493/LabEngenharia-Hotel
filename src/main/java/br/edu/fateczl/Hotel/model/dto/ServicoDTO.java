@@ -4,15 +4,18 @@ import br.edu.fateczl.Hotel.model.dto.interfaces.IDTO;
 import br.edu.fateczl.Hotel.model.entity.Servico;
 
 public class ServicoDTO implements IDTO<Servico>{
-	private Integer codigo;
+	private Integer id;
 	private String nome;
 	private Double valor;
 
-	public Integer getCodigo() {
-		return codigo;
+	
+	
+	
+	public Integer getId() {
+		return id;
 	}
-	public void setCodigo(Integer codigo) {
-		this.codigo = codigo;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	public String getNome() {
 		return nome;
@@ -29,7 +32,7 @@ public class ServicoDTO implements IDTO<Servico>{
 	@Override
 	public Servico toEntity() {
 		Servico s = new Servico();
-		s.setCodigo(this.codigo);
+		s.setId(this.id);
 		s.setNome(this.nome);
 		s.setValor(this.valor);
 		return s;

@@ -18,8 +18,8 @@ public class Servico implements IEntity<ServicoDTO> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "codigo", length = 50, nullable = false)
-	private Integer codigo;
+	@Column(name = "id", length = 50, nullable = false)
+	private Integer id;
 
 	
 	@Column(name = "nome", length = 50, nullable = true)
@@ -28,12 +28,14 @@ public class Servico implements IEntity<ServicoDTO> {
 	@Column(name = "valor", nullable = false)
 	private Double valor;
 
-	public Integer getCodigo() {
-		return codigo;
+	
+
+	public Integer getId() {
+		return id;
 	}
 
-	public void setCodigo(Integer codigo) {
-		this.codigo = codigo;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getNome() {
@@ -56,7 +58,7 @@ public class Servico implements IEntity<ServicoDTO> {
 	@Override
 	public ServicoDTO toDTO() {
 		ServicoDTO dto = new ServicoDTO();
-		dto.setCodigo(this.codigo);
+		dto.setId(this.id);
 		dto.setNome(this.nome);
 		dto.setValor(this.valor);
 		return dto;
