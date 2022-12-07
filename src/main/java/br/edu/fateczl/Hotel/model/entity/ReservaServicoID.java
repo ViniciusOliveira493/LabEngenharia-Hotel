@@ -27,19 +27,19 @@ public class ReservaServicoID implements Serializable {
 	private Servico sID;
 
 	@ManyToOne(targetEntity = Reserva.class, fetch = FetchType.EAGER)
-	@JoinColumn(name = "codigo", nullable = false)
+	@JoinColumn(name = "tipoDocumento", nullable = false)
 	private Reserva tipoDocumento;
 
 	@ManyToOne(targetEntity = Reserva.class, fetch = FetchType.EAGER)
-	@JoinColumn(name = "codigo", nullable = false)
+	@JoinColumn(name = "dataInicio", nullable = false)
 	private Reserva dataInicio;
 
 	@ManyToOne(targetEntity = Reserva.class, fetch = FetchType.EAGER)
-	@JoinColumn(name = "codigo", nullable = false)
+	@JoinColumn(name = "documento", nullable = false)
 	private Reserva pessoaDocumento;
 
 	@ManyToOne(targetEntity = Reserva.class, fetch = FetchType.EAGER)
-	@JoinColumn(name = "codigo", nullable = false)
+	@JoinColumn(name = "quarto", nullable = false)
 	private Reserva quartoID;
 
 	public Servico getsID() {
