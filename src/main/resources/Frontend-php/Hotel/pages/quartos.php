@@ -26,7 +26,7 @@
             <div class="mt-3">
                 <div class="form-group">
                     <label for="numero">Descrição:</label>
-                    <input type="number" class="form-control" id="txtNumQuarto" placeholder="Número do quarto">
+                    <input type="number" class="form-control" id="txtNumQuartoModal" placeholder="Número do quarto">
                 </div>
             </div>
             <div class="input-group-append">
@@ -38,12 +38,13 @@
             <div class="mt-3">
                 <div class="form-group">
                     <label for="andar">Andar</label>
-                    <input type="number" class="form-control" id="txtAndar">
+                    <input type="number" class="form-control" id="txtAndarModal">
+                </div>
             </div>  
             <div class="mt-3">
                 <div class="form-group">
                     <label for="predio">Predio</label>
-                    <input type="text" class="form-control" id="txtPredio">
+                    <input type="text" class="form-control" id="txtPredioModal">
                 </div>
             </div>
         </form>
@@ -97,6 +98,12 @@
                                     <input type="text" class="form-control" id="txtPredio" aria-describedby="emailHelp" placeholder="Prédio">
                                 </div>
                             </div>
+                            <div class="mt-3">
+                                <div class="form-group">
+                                    <label for="andar">Andar</label>
+                                    <input type="number" class="form-control" id="txtAndar">
+                                </div>
+                            </div>  
                             <div class="input-group-append">
                                 <label for="exampleFormControlSelect1">Tipo de Quarto</label>
                                 <select class="form-control" id="selectTipoQuarto">
@@ -107,7 +114,7 @@
                             <div class="mt-3">
                                 <div class="form-group">
                                     <label for="Número do quarto">Número do quarto</label>
-                                    <input type="number" min="0" class="form-control" id="txt" placeholder="0.00">
+                                    <input type="number" min="0" class="form-control" id="txtNumQuarto">
                                 </div>
                             </div>
                 

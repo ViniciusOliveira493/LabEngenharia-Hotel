@@ -27,11 +27,11 @@ function carregarSelect(){
 	});
 }
 
-function criarItemVaga(dados){
+function criarItemQuarto(dados){
     var usr = document.createElement('li');
     usr.setAttribute("class","list-group-item")
-    usr.setAttribute("onclick","abrirQuarto(dados.IdQuarto)")
-    usr.append(dados.IdQuarto);
+    usr.setAttribute("onclick","abrirQuarto('"+dados.id+"')");
+    usr.append("Andar: "+dados.andar+"| Número: "+dados.numero);
     return usr;
 }
 
@@ -40,7 +40,7 @@ function criarOptionTipoQuarto(opcao){
 }
 
 function abrirQuarto(IdQuarto){
-    var url = urlbase + "Quartos/"+IdQuarto+"/";
+    var url = urlbase + "quartos/"+IdQuarto;
     $.ajax({
 		url : url,
 		contentType: "application/json",
@@ -56,19 +56,18 @@ function abrirQuarto(IdQuarto){
 }
 
 function setDados(dados){
-    getElementById('txtIdQuarto').value = dados.IdQuarto;
-    getElementById('txtPredio').value = dados.Predio;
-    getElementById('txtAndar').value = dados.Andar;
-    getElementById('txtNumQuarto').value = dados.numQuarto;
+    console.log(dados)
+    getElementById('txtIdQuarto').value = dados.id;
+    getElementById('txtPredio').value = dados.predio;
+    getElementById('txtAndar').value = dados.andar;
+    getElementById('txtNumQuarto').value = dados.numero;
     getElementById('selectTipoQuarto').value = dados.tipo.id;
-    getElementById('txtDiaria').value = dados.valorDiaria;
 
     getElementById('txtIdQuarto').disabled  = true;
     getElementById('txtPredio').disabled  = true;
     getElementById('txtAndar').disabled  = true;
     getElementById('txtNumQuarto').disabled  = true
     getElementById('selectTipoQuarto').disabled  = true
-    getElementById('txtDiaria').disabled  = true
 
 }
 
@@ -76,11 +75,10 @@ function getDados(){
     var quarto = new Object();
     quarto.IdQuarto =getElementById('txtIdQuarto').value;
     quarto.Predio = getElementById('txtPredio').value;
-    quarto.Andar = getElementById('txtAndar').value = dados.Andar;;
+    quarto.Andar = getElementById('txtAndar').value;
     var tipoQuarto = new Object();
     tipoQuarto.id = getElementById('selectTipoQuarto').value;
     quarto.tipo = tipoQuarto;
-    quarto.valorDiaria=getElementById('txtDiaria').value;
 
     return quarto;
 }
@@ -184,7 +182,6 @@ document.getElementById('btnSubmitModal').addEventListener('click',function subm
         quarto.IdQuarto = i;
         quarto.Predio = quartos.Predio;
         quarto.tipoQuarto = quartos.tipoQuarto;
-        quarto.valorDiaria = quartos.valorDiaria;
 
         alterarQuarto('POST',quarto,false);       
     }
@@ -201,18 +198,14 @@ function getDadosModal(){
     var tipoQuarto = new Object();
     tipoQuarto.id = getElementById('selectTipoQuarto').value;
     quarto.tipo = tipoQuarto;
-    quarto.valorDiaria=getElementById('txtDiaria').value;
 
     return quarto;
 }
-
-
 
 function limparDadosModal(){
     getElementById('txtIdQuarto').value = "0";
     getElementById('txtPredio').value = "";
     getElementById('txtAndar').value = "0";
     getElementById('txtnumQuarto').value = "0";
-    getElementById('selectTipoQuarto').value = "0";
-    getElementById('txtDiaria').value = "0.00";    
+    getElementById('selectTipoQuarto').value = "0";  
 }

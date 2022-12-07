@@ -47,6 +47,9 @@ function adicionarMenus(){
         '<li class="nav-item">'
             +'<a class="nav-link" href="vagas">Vagas</a>'
         +'</li>'
+        +'<li class="nav-item">'
+        +   '<a class="nav-link" href="quartos">Quartos</a>'
+        +'</li>'
         }
         if(user.funcao > -1){
             html += 
