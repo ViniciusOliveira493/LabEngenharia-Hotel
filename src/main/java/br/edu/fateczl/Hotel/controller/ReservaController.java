@@ -46,7 +46,7 @@ public class ReservaController extends Controller<ReservaDTO>{
 	}
 
 	@GetMapping("/reserva/{reservaId}")
-	public ResponseEntity<ReservaDTO> findOne(@PathVariable(name="reservaId") BigInteger id) {
+	public ResponseEntity<ReservaDTO> findOne(@PathVariable(name="reservaId") Long id) {
 		Optional<Reserva> s = rep.findById(id);
 		Reserva res = s.orElseThrow(()-> new ResourceNotFoundException(this.notFound("uma reserva",id+"")));
 		return ResponseEntity.ok().body(res.toDTO());
