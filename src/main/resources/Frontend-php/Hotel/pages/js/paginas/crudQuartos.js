@@ -27,7 +27,7 @@ function carregarSelect(){
 	});
 }
 
-function criarItemVaga(dados){
+function criarItemQuarto(dados){
     var usr = document.createElement('li');
     usr.setAttribute("class","list-group-item")
     usr.setAttribute("onclick","abrirQuarto(dados.IdQuarto)")
