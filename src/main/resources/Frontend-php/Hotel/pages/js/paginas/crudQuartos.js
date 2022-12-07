@@ -27,7 +27,7 @@ function carregarSelect(){
 	});
 }
 
-function criarItemVaga(dados){
+function criarItemQuarto(dados){
     var usr = document.createElement('li');
     usr.setAttribute("class","list-group-item")
     usr.setAttribute("onclick","abrirQuarto(dados.IdQuarto)")
@@ -59,14 +59,14 @@ function setDados(dados){
     getElementById('txtIdQuarto').value = dados.IdQuarto;
     getElementById('txtPredio').value = dados.Predio;
     getElementById('txtAndar').value = dados.Andar;
-    getElementById('txtNumQuarto').value = dados.numQuarto;
+    getElementById('txtnumQuarto').value = dados.numQuarto;
     getElementById('selectTipoQuarto').value = dados.tipo.id;
     getElementById('txtDiaria').value = dados.valorDiaria;
 
     getElementById('txtIdQuarto').disabled  = true;
     getElementById('txtPredio').disabled  = true;
     getElementById('txtAndar').disabled  = true;
-    getElementById('txtNumQuarto').disabled  = true
+    getElementById('txtnumQuarto').disabled  = true
     getElementById('selectTipoQuarto').disabled  = true
     getElementById('txtDiaria').disabled  = true
 
@@ -121,7 +121,7 @@ function limpaDados(){
     getElementById('txtIdQuarto').disabled  = "";
     getElementById('txtPredio').disabled  = "";
     getElementById('txtAndar').disabled  = "";
-    getElementById('txtNumQuarto').disabled  = "";
+    getElementById('txtnumQuarto').disabled  = "";
     getElementById('selectTipoQuarto').disabled  = 0
 }
 document.getElementById('btnEditCad').addEventListener('click',function submitFormCad(e){
@@ -209,10 +209,12 @@ function getDadosModal(){
 
 
 function limparDadosModal(){
+
     getElementById('txtIdQuarto').value = "0";
     getElementById('txtPredio').value = "";
     getElementById('txtAndar').value = "0";
     getElementById('txtnumQuarto').value = "0";
     getElementById('selectTipoQuarto').value = "0";
-    getElementById('txtDiaria').value = "0.00";    
+    getElementById('txtDiaria').value = "0.00"
+    
 }
