@@ -1,5 +1,6 @@
 package br.edu.fateczl.Hotel.controller;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -20,14 +21,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.fateczl.Hotel.controller.interfaces.Controller;
 import br.edu.fateczl.Hotel.model.dto.ReservaDTO;
-import br.edu.fateczl.Hotel.model.dto.ServicoDTO;
-import br.edu.fateczl.Hotel.model.entity.PessoaID;
-import br.edu.fateczl.Hotel.model.entity.QuartoID;
 import br.edu.fateczl.Hotel.model.entity.Reserva;
-import br.edu.fateczl.Hotel.model.entity.ReservaID;
-import br.edu.fateczl.Hotel.model.entity.Servico;
 import br.edu.fateczl.Hotel.repository.ReservaRepository;
-import br.edu.fateczl.Hotel.repository.ServicoRepository;
+import br.edu.fateczl.Hotel.repository.reservaCustom.ReservaCustomRep;
 
 @RestController
 @RequestMapping("/api")
@@ -35,6 +31,7 @@ public class ReservaController extends Controller<ReservaDTO>{
 	@Autowired
 	ReservaRepository rep;
 	
+	ReservaCustomRep rcr = new ReservaCustomRep();
 	@Override
 	@GetMapping("/reserva")
 	public List<ReservaDTO> findAll() {
@@ -48,37 +45,57 @@ public class ReservaController extends Controller<ReservaDTO>{
 		return res;
 	}
 
-	@GetMapping("/reserva/{reservaID}")
-	public ResponseEntity<ReservaDTO> findOne(@PathVariable(name="documento") PessoaID doc, @PathVariable(name="tipodocumento") PessoaID tipoDoc,
-			@PathVariable(name="quartoid") QuartoID qID, @PathVariable(name="dataInicio") String dataInicio) {
-		ReservaID id = new ReservaID();
-		id.setDocumento(doc);
-		id.setQuartoID(qID);
-		id.setTipoDocumento(tipoDoc);
-		id.setDataInicio(dataInicio);
-;		Optional<Reserva> s = rep.findById(id);
-		Reserva res = s.orElseThrow(()-> new ResourceNotFoundException(this.notFound("um serviço",id+"")));
+	@GetMapping("/reserva/{reservaId}")
+	public ResponseEntity<ReservaDTO> findOne(@PathVariable(name="reservaId") Long id) {
+		Optional<Reserva> s = rep.findById(id);
+		Reserva res = s.orElseThrow(()-> new ResourceNotFoundException(this.notFound("uma reserva",id+"")));
 		return ResponseEntity.ok().body(res.toDTO());
 	}
-
+	
+	@GetMapping("/reserva/{documento}/{tipodocumento}/{dataInicio}")
+	public List<ReservaDTO> findData(@PathVariable(name="documento") String doc, 
+												@PathVariable(name="tipodocumento") int tipoDoc, 
+												 	@PathVariable(name="dataInicio") String dataInicio) {
+		List<Reserva> reserva = rep.buscarData(tipoDoc, doc, dataInicio);
+		List<ReservaDTO> res =  new ArrayList<>();
+		
+		for(Reserva re: reserva) {
+			res.add(re.toDTO());
+		}		
+		return res;
+	}
+	
+	@GetMapping("/reservaData/{documento}/{tipodocumento}/{dataInicio}")
+	public List<ReservaDTO> findReservas(@PathVariable(name="documento") String doc, 
+												@PathVariable(name="tipodocumento") int tipoDoc, 
+												 	@PathVariable(name="dataInicio") String dataInicio) {
+		List<Reserva> reserva = rep.buscarReservas(tipoDoc, doc, dataInicio);
+		List<ReservaDTO> res =  new ArrayList<>();
+		
+		for(Reserva re: reserva) {
+			res.add(re.toDTO());
+		}		
+		return res;
+	}
+	
 	@Override
-	@PostMapping("/reserva/")
+	@PostMapping("/reserva")
 	public ResponseEntity<String> insert(@Valid @RequestBody ReservaDTO obj) {
-		rep.save(obj.toEntity());
+		System.err.println(obj.toString());
+		rcr.criarReserva(obj);
 		return ResponseEntity.ok().body(this.sucesso(1));
 	}
 
 	@Override
-	@PutMapping("/reserva/")
+	@PutMapping("/reserva")
 	public ResponseEntity<String> update(@Valid @RequestBody ReservaDTO obj) {
-		rep.save(obj.toEntity());
-		return ResponseEntity.ok().body(this.sucesso(2));
+		return ResponseEntity.ok().body("A atualização não é permitida para reservas");
 	}
 
 	@Override
-	@DeleteMapping("/reserva/")
+	@DeleteMapping("/reserva")
 	public ResponseEntity<String> delete(ReservaDTO obj) {
-		rep.delete(obj.toEntity());
+		rcr.cancelarReserva(obj);
 		return ResponseEntity.ok().body(this.sucesso(3));
 	}
 

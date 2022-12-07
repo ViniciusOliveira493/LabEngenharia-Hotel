@@ -19,12 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.fateczl.Hotel.controller.interfaces.Controller;
-import br.edu.fateczl.Hotel.model.dto.QuartoDTO;
 import br.edu.fateczl.Hotel.model.dto.TipoQuartoDTO;
-import br.edu.fateczl.Hotel.model.entity.Quarto;
-import br.edu.fateczl.Hotel.model.entity.QuartoID;
 import br.edu.fateczl.Hotel.model.entity.TipoQuarto;
-import br.edu.fateczl.Hotel.repository.QuartoRepository;
 import br.edu.fateczl.Hotel.repository.TipoQuartoRepository;
 
 @RestController

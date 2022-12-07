@@ -2,23 +2,19 @@ package br.edu.fateczl.Hotel.model.dto;
 
 import br.edu.fateczl.Hotel.model.dto.interfaces.IDTO;
 import br.edu.fateczl.Hotel.model.entity.Quarto;
-import br.edu.fateczl.Hotel.model.entity.QuartoID;
-import br.edu.fateczl.Hotel.model.entity.TipoVaga;
-import br.edu.fateczl.Hotel.model.entity.Vaga;
-import br.edu.fateczl.Hotel.model.entity.VagaId;
 
 public class QuartoDTO implements IDTO<Quarto> {
-	private int id;
+	private Long id;
 	private TipoQuartoDTO tipo;
 	private String predio;
 	private int andar;
 	private int numero;
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -54,13 +50,18 @@ public class QuartoDTO implements IDTO<Quarto> {
 		this.numero = numero;
 	}
 
+	
+	@Override
+	public String toString() {
+		return "QuartoDTO [id=" + id + ", tipo=" + tipo + ", predio=" + predio + ", andar=" + andar + ", numero="
+				+ numero + "]";
+	}
+
 	@Override
 	public Quarto toEntity() {
 		Quarto q = new Quarto();
 		q.setAndar(this.andar);
-		QuartoID qID = new QuartoID();
-		qID.setID(this.id);
-		q.setId(qID);
+		q.setId(this.id);
 		q.setTipo(this.tipo.toEntity());
 		return q;
 	}

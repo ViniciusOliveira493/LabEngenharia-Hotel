@@ -57,11 +57,13 @@ public class Vaga implements IEntity<VagaDTO>{
 	
 	public VagaDTO toDTO() {
 		VagaDTO dto = new VagaDTO();
-		dto.setDescricao(this.descricao);
-		dto.setEstacionamento(this.id.getEstacionamento());
-		dto.setNumVaga(this.id.getNumVaga());
-		dto.setTipo(this.tipo.toDTO());
-		dto.setValorDiaria(this.valorDiaria);
+		if(this.id != null) {
+			dto.setDescricao(this.descricao);		
+			dto.setEstacionamento(this.id.getEstacionamento());		
+			dto.setNumVaga(this.id.getNumVaga());
+			dto.setTipo(this.tipo.toDTO());				
+			dto.setValorDiaria(this.valorDiaria);
+		}
 		return dto;
 	}
 }

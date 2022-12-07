@@ -30,7 +30,7 @@ public class UnidadeDeMedidaController extends Controller<UnidadeDeMedidaDTO>{
 	UnidadeDeMedidaRepository rep;
 	
 	@Override
-	@GetMapping("/unidademedida")
+	@GetMapping("/unidademedida/")
 	public List<UnidadeDeMedidaDTO> findAll() {
 		List<UnidadeDeMedida> lista = rep.findAll();
 		List<UnidadeDeMedidaDTO> li = new ArrayList<>();
@@ -51,21 +51,21 @@ public class UnidadeDeMedidaController extends Controller<UnidadeDeMedidaDTO>{
 	}
 
 	@Override
-	@PostMapping("/unidademedida/")
+	@PostMapping("/unidademedida")
 	public ResponseEntity<String> insert(@Valid @RequestBody UnidadeDeMedidaDTO obj) {
 		rep.save(obj.toEntity());
 		return ResponseEntity.ok().body(this.sucesso(1));
 	}
 
 	@Override
-	@PutMapping("/unidademedida/")
+	@PutMapping("/unidademedida")
 	public ResponseEntity<String> update(@Valid @RequestBody UnidadeDeMedidaDTO obj) {
 		rep.save(obj.toEntity());
 		return ResponseEntity.ok().body(this.sucesso(2));
 	}
 
 	@Override
-	@DeleteMapping("/unidademedida/")
+	@DeleteMapping("/unidademedida")
 	public ResponseEntity<String> delete(UnidadeDeMedidaDTO obj) {
 		rep.delete(obj.toEntity());
 		return ResponseEntity.ok().body(this.sucesso(3));

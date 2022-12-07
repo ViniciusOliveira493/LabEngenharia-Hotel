@@ -1,5 +1,6 @@
 package br.edu.fateczl.Hotel.controller;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -23,64 +24,40 @@ import br.edu.fateczl.Hotel.model.dto.ProdutoServicoDTO;
 import br.edu.fateczl.Hotel.model.entity.ProdutoServico;
 import br.edu.fateczl.Hotel.model.entity.ProdutoServicoID;
 import br.edu.fateczl.Hotel.repository.ProdutoServicoRepository;
+import br.edu.fateczl.Hotel.repository.pscr.ProdutoServicoCustomRepository;
 
 @RestController
 @RequestMapping("/api")
-public class ProdutoServicoController extends Controller<ProdutoServicoDTO>{
-
-		@Autowired
-		ProdutoServicoRepository rep;
+public class ProdutoServicoController{
+	@Autowired
+	ProdutoServicoRepository rep;	
+	
+	ProdutoServicoCustomRepository pscr = new ProdutoServicoCustomRepository();
+	@GetMapping("/produtoservico/{idServico}")
+	public List<ProdutoServicoDTO> findAll(@PathVariable(name="idServico") BigInteger id) {
+		List<ProdutoServico> produtoservico = pscr.find(id);
+		List<ProdutoServicoDTO> prse = new ArrayList<>();
 		
-		@Override
-		@GetMapping("/produtoservico/")
-		public List<ProdutoServicoDTO> findAll() {
-			List<ProdutoServico> produtoservico = rep.findAll();
-			List<ProdutoServicoDTO> prse = new ArrayList<>();
-			
-			for(ProdutoServico ps:produtoservico) {
-				prse.add(ps.toDTO());
-			}
-			return prse;
+		for(ProdutoServico ps:produtoservico) {
+			prse.add(ps.toDTO());
 		}
-
-		@GetMapping("/produtoservico/{id}/{Codigo}")
-		public ResponseEntity<ProdutoServicoDTO> findOne(@PathVariable(name="id") Integer p,@PathVariable(name="codigo") Integer s) {
-			ProdutoServicoID id = new ProdutoServicoID();
-			id.setPCodigo(p);
-			id.setSCodigo(s);
-			Optional<ProdutoServico> prsv = rep.findById(id);
-			ProdutoServico ps = prsv.orElseThrow(()-> new ResourceNotFoundException(notFound("um produto no serviço "+p, s+"")));
-			return ResponseEntity.ok().body(ps.toDTO());
-		}
-
-		@Override
-		@PostMapping("/produtoservico")
-		public ResponseEntity<String> insert(@Valid @RequestBody ProdutoServicoDTO obj) {
-			rep.save(obj.toEntity());
-			return ResponseEntity.ok().body(sucesso(1));
-		}
-
-		@Override
-		@PutMapping("/produtoservico")
-		public ResponseEntity<String> update(@Valid @RequestBody ProdutoServicoDTO obj) {
-			rep.save(obj.toEntity());
-			return ResponseEntity.ok().body(sucesso(2));
-		}
-
-		@Override
-		@DeleteMapping("/produtoservico")
-		public ResponseEntity<String> delete(@Valid @RequestBody ProdutoServicoDTO obj) {
-			rep.delete(obj.toEntity());
-			return ResponseEntity.ok().body(sucesso(3));
-		}
-
-		@Override
-		public ResponseEntity<ProdutoServicoDTO> findOne(Integer a) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-		
+		return prse;
 	}
+
+	
+	@PostMapping("/produtoservico")
+	public ResponseEntity<String> insert(@Valid @RequestBody ProdutoServicoDTO obj) {
+		pscr.cadastrar(obj);
+		return ResponseEntity.ok().body("Cadastrado");
+	}
+
+	
+	@DeleteMapping("/produtoservico")
+	public ResponseEntity<String> delete(@Valid @RequestBody ProdutoServicoDTO obj) {
+		pscr.apagarTd(obj);
+		return ResponseEntity.ok().body("Apagado com sucesso");
+	}		
+}
 
 
 

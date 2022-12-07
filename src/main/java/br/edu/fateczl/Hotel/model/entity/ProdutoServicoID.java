@@ -3,47 +3,42 @@ package br.edu.fateczl.Hotel.model.entity;
 import java.io.Serializable;
 
 import javax.persistence.FetchType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 public class ProdutoServicoID implements Serializable {
-	private static final long serialVersionUID = 1L;
-
+	private static final long serialVersionUID = 1L;	
+	
 	public ProdutoServicoID() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public ProdutoServicoID(Integer PCodigo, Integer SCodigo) {
-		this.PCodigo = PCodigo;
-		this.SCodigo = SCodigo;
+	public ProdutoServicoID(Integer codigo, Integer id) {
+		this.codigoProduto = codigo;
+		this.idServico = id;
 	}
-	
-	
 	
 	@ManyToOne(targetEntity = Produto.class, fetch = FetchType.EAGER)
-	@JoinColumn(name = "id", nullable = false)
-	private Integer PCodigo;
-	
+	@JoinColumn(name = "codigoProduto", nullable = false)
+	private Integer codigoProduto;
 	
 	@ManyToOne(targetEntity = Servico.class, fetch = FetchType.EAGER)
-	@JoinColumn(name = "codigo", nullable = false)
-	private Integer SCodigo;
+	@JoinColumn(name = "idServico", nullable = false)
+	private Integer idServico;
 
-	public Integer getPCodigo() {
-		return PCodigo;
+	public Integer getCodigoProduto() {
+		return codigoProduto;
 	}
 
-	public void setPCodigo(Integer pCodigo) {
-		PCodigo = pCodigo;
+	public void setCodigoProduto(Integer codigoProduto) {
+		this.codigoProduto = codigoProduto;
 	}
 
-	public Integer getSCodigo() {
-		return SCodigo;
+	public Integer getIdServico() {
+		return idServico;
 	}
 
-	public void setSCodigo(Integer sCodigo) {
-		SCodigo = sCodigo;
+	public void setIdServico(Integer idServico) {
+		this.idServico = idServico;
 	}
-
 }

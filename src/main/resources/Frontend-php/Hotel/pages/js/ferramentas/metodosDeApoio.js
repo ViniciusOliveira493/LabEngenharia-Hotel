@@ -24,7 +24,7 @@ function limparDocumento(txt){
 
 function carregarTiposDocumento(selectIds){
 	$.ajax({
-		url : 'http://localhost:8080/api/tipodocumento',
+		url : urlbase+'tipodocumento',
 		contentType: "application/json",
 		type : "GET",
 		data : ""
@@ -62,6 +62,54 @@ function aplicarMascarasDocumentos(select,field){
 }
 
 function criarOptionDocumento(opcao){
+  return new Option(opcao.tipo,opcao.id)
+}
+/* Seleção do tipo de quarto */
+function carregarTiposQuarto(selectIds){
+	$.ajax({
+		url : urlbase+'tipoquarto',
+		contentType: "application/json",
+		type : "GET",
+		data : ""
+	})
+	.done(function(msg){
+        selectIds.forEach(e =>{
+          let select = document.getElementById(e);
+          msg.forEach(f => {
+            getElementById(e).append(criarOptionTipoQuarto(f));
+          });
+        });		
+	})
+	.fail(function(jqXHR, textStatus, msg){
+		console.log(msg);
+	});
+}
+
+function criarOptionTipoQuarto(opcao){
+  return new Option(opcao.tipo,opcao.id)
+}
+/* Seleção do tipo de vaga*/
+function carregarTiposVaga(selectIds){
+	$.ajax({
+		url : urlbase+'tipovaga',
+		contentType: "application/json",
+		type : "GET",
+		data : ""
+	})
+	.done(function(msg){
+        selectIds.forEach(e =>{
+          let select = document.getElementById(e);
+          msg.forEach(f => {
+            getElementById(e).append(criarOptionTipoVaga(f));
+          });
+        });		
+	})
+	.fail(function(jqXHR, textStatus, msg){
+		console.log(msg);
+	});
+}
+
+function criarOptionTipoVaga(opcao){
   return new Option(opcao.tipo,opcao.id)
 }
 /*  ============== COOKIES ==================    */

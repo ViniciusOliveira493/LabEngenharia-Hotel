@@ -19,68 +19,77 @@ public class Produto implements IEntity<ProdutoDTO>{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", length = 10, nullable = false)
-	private Integer id;
+	@Column(name = "codigo", length = 10, nullable = false)
+	private Integer codigo;
 
 	@Column(name = "nome", length = 50, nullable = false)
 	private String nome;
 
 	@ManyToOne(targetEntity = UnidadeDeMedida.class, fetch = FetchType.LAZY)
-	@JoinColumn(name = "UdM", nullable = false)
-	private UnidadeDeMedida UdM;
+	@JoinColumn(name = "id", nullable = true)
+	private UnidadeDeMedida id;
 
 	@Column(name = "valor", nullable = false)
 	private Double valor;
 
 	@Column(name = "conteudo", nullable = false)
 	private Double conteudo;
-
+	
 	public Integer getCodigo() {
-		return id;
+		return codigo;
+	}
+	
+	public void setCodigo(Integer codigo) {
+		this.codigo = codigo;
 	}
 
-	public void setCodigo(Integer codigo) {
-		this.id = codigo;
-	}
 
 	public String getNome() {
 		return nome;
 	}
 
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
-	public UnidadeDeMedida getUdM() {
-		return UdM;
+
+	public UnidadeDeMedida getId() {
+		return id;
 	}
 
-	public void setUdM(UnidadeDeMedida udM) {
-		UdM = udM;
+
+	public void setId(UnidadeDeMedida id) {
+		this.id = id;
 	}
+
 
 	public Double getValor() {
 		return valor;
 	}
 
+
 	public void setValor(Double valor) {
 		this.valor = valor;
 	}
+
 
 	public Double getConteudo() {
 		return conteudo;
 	}
 
+
 	public void setConteudo(Double conteudo) {
 		this.conteudo = conteudo;
 	}
 
+
 	@Override
 	public ProdutoDTO toDTO() {
 		ProdutoDTO dto = new ProdutoDTO();
-		dto.setCodigo(this.id);
+		dto.setCodigo(this.codigo);
 		dto.setNome(this.nome);
-		dto.setUdM(this.UdM.toDTO());
+		dto.setId(this.id.toDTO());
 		dto.setValor(this.valor);
 		dto.setConteudo(this.conteudo);
 		return dto;

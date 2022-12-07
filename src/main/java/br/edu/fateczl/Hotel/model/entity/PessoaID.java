@@ -33,6 +33,12 @@ public class PessoaID implements Serializable{
 		return tipoDocumento;
 	}
 
+	
+	@Override
+	public String toString() {
+		return "PessoaID [documento=" + documento + ", tipoDocumento=" + tipoDocumento + "]";
+	}
+
 	public void setTipoDocumento(TipoDocumento tipoDocumento) {
 		this.tipoDocumento = tipoDocumento;
 	}

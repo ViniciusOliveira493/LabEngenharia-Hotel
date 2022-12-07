@@ -39,6 +39,17 @@ public class VagaController extends Controller<VagaDTO>{
 		return vagas;
 	}
 	
+	@GetMapping("/vagasdisp/{data}/{tipo}")
+	public List<VagaDTO> findByData(@PathVariable(name="data") String data,
+			@PathVariable(name="tipo") int tipo) {
+		List<Vaga> vagas = rep.buscarDisponiveis(data, tipo);
+		List<VagaDTO> va = new ArrayList<>();		
+		for(Vaga v:vagas) {
+			va.add(v.toDTO());
+		}
+		return va;
+	}
+	
 	@Override
 	@GetMapping("/vagas/")
 	public List<VagaDTO> findAll() {

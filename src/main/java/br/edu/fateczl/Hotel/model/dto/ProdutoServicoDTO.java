@@ -6,24 +6,24 @@ import br.edu.fateczl.Hotel.model.entity.ProdutoServicoID;
 
 public class ProdutoServicoDTO implements IDTO<ProdutoServico> {
 
-	private Integer pid;
-	private Integer sid;
+	private Integer produtoId;
+	private Integer servicoId;
 	private Integer qtd;
 
-	public Integer getPid() {
-		return pid;
+	public Integer getProdutoId() {
+		return produtoId;
 	}
 
-	public void setPid(Integer pid) {
-		this.pid = pid;
+	public void setProdutoId(Integer produtoId) {
+		this.produtoId = produtoId;
 	}
 
-	public Integer getSid() {
-		return sid;
+	public Integer getServicoId() {
+		return servicoId;
 	}
 
-	public void setSid(Integer sid) {
-		this.sid = sid;
+	public void setServicoId(Integer servicoId) {
+		this.servicoId = servicoId;
 	}
 
 	public Integer getQtd() {
@@ -39,8 +39,8 @@ public class ProdutoServicoDTO implements IDTO<ProdutoServico> {
 		ProdutoServico ps = new ProdutoServico();
 		ps.setQtd(this.qtd);
 		ProdutoServicoID psid = new ProdutoServicoID();
-		psid.setPCodigo(this.pid);
-		psid.setSCodigo(this.sid);
+		psid.setCodigoProduto(this.produtoId);
+		psid.setIdServico(this.servicoId);
 		ps.setId(psid);
 		return ps;
 	}

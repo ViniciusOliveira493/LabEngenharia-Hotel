@@ -21,8 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 import br.edu.fateczl.Hotel.controller.interfaces.Controller;
 import br.edu.fateczl.Hotel.model.dto.QuartoDTO;
 import br.edu.fateczl.Hotel.model.entity.Quarto;
-import br.edu.fateczl.Hotel.model.entity.QuartoID;
-import br.edu.fateczl.Hotel.model.entity.TipoQuarto;
 import br.edu.fateczl.Hotel.repository.QuartoRepository;
 
 @RestController
@@ -43,11 +41,21 @@ public class QuartoController extends Controller<QuartoDTO>{
 		return qt;
 	}
 
+	@GetMapping("/quartosdisp/{data}/{tipo}")
+	public List<QuartoDTO> findDisponiveis(@PathVariable(name="data") String data,
+			@PathVariable(name="tipo") int tipo) {
+		List<Quarto> quartos = rep.buscarQuartosDisponiveis(data, tipo);
+		List<QuartoDTO> qt = new ArrayList<>();
+		
+		for(Quarto q:quartos) {
+			qt.add(q.toDTO());
+		}
+		return qt;
+	}
+	
 	@GetMapping("/quartos/{id}")
-	public ResponseEntity<QuartoDTO> findOne(@PathVariable(name="id") Integer i) {
-		QuartoID id = new QuartoID();
-		id.setID(i);
-		Optional<Quarto> quarto = rep.findById(id);
+	public ResponseEntity<QuartoDTO> findOne(@PathVariable(name="id") Long i) {
+		Optional<Quarto> quarto = rep.findById(i);
 		Quarto q = quarto.orElseThrow(()-> new ResourceNotFoundException(notFound("um quarto do tipo" , i+ "")));
 		return ResponseEntity.ok().body(q.toDTO());
 	}
@@ -71,6 +79,12 @@ public class QuartoController extends Controller<QuartoDTO>{
 	public ResponseEntity<String> delete(@Valid @RequestBody QuartoDTO obj) {
 		rep.delete(obj.toEntity());
 		return ResponseEntity.ok().body(sucesso(3));
+	}
+
+	@Override
+	public ResponseEntity<QuartoDTO> findOne(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

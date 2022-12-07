@@ -31,9 +31,6 @@ function adicionarMenus(){
     var div = getElementById("menuNavItens");
     var html = ' <li class="nav-item">'
         +'<a class="nav-link" aria-current="page" href="home">Home</a>'
-        +'</li>'
-        +' <li class="nav-item">'
-        +'<a class="nav-link" aria-current="page" href="reservas">Reservas</a>'
         +'</li>';
     
     if(!checkUndefined(user)){
@@ -50,6 +47,12 @@ function adicionarMenus(){
         '<li class="nav-item">'
             +'<a class="nav-link" href="vagas">Vagas</a>'
         +'</li>'
+        }
+        if(user.funcao > -1){
+            html += 
+            ' <li class="nav-item">'
+            +'<a class="nav-link" aria-current="page" href="reservas">Reservas</a>'
+            +'</li>'
         }
     }
 

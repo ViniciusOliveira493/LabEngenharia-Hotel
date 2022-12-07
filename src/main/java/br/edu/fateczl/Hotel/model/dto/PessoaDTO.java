@@ -72,6 +72,12 @@ public class PessoaDTO implements IDTO<Pessoa>{
 	public void setFuncao(int funcao) {
 		this.funcao = funcao;
 	}
+	
+	@Override
+	public String toString() {
+		return "PessoaDTO [id=" + id + ", nome=" + nome + ", senha=" + senha + ", email=" + email + ", telefone="
+				+ telefone + ", funcao=" + funcao + "]";
+	}
 	@Override
 	public Pessoa toEntity() {
 		Pessoa p = new Pessoa();

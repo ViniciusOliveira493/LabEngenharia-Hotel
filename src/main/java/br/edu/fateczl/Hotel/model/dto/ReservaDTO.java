@@ -1,27 +1,34 @@
 package br.edu.fateczl.Hotel.model.dto;
 
-import java.time.LocalDateTime;
 import br.edu.fateczl.Hotel.model.dto.interfaces.IDTO;
-import br.edu.fateczl.Hotel.model.entity.PessoaID;
-import br.edu.fateczl.Hotel.model.entity.QuartoID;
+import br.edu.fateczl.Hotel.model.entity.Pessoa;
+import br.edu.fateczl.Hotel.model.entity.Quarto;
 import br.edu.fateczl.Hotel.model.entity.Reserva;
-import br.edu.fateczl.Hotel.model.entity.VagaId;
+import br.edu.fateczl.Hotel.model.entity.Vaga;
 
 public class ReservaDTO implements IDTO<Reserva> {
+	private Long id;
 	private String dataInicio;
 	private String dataFim;
-	private PessoaID documento;
-	private PessoaID tipoDocumento;
-	private QuartoID quartoID;
-	private VagaId vagaEstacionamento;
-	private VagaId numVaga;
+	private PessoaDTO documento;
+	private QuartoDTO quarto;
+	private VagaDTO vaga;
 
-	public VagaId getNumVaga() {
-		return numVaga;
+	
+	public Long getId() {
+		return id;
 	}
 
-	public void setNumVaga(VagaId numVaga) {
-		this.numVaga = numVaga;
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public VagaDTO getVaga() {
+		return vaga;
+	}
+
+	public void setVaga(Vaga numVaga) {
+		this.vaga = numVaga.toDTO();
 	}
 
 	public String getDataInicio() {
@@ -40,47 +47,36 @@ public class ReservaDTO implements IDTO<Reserva> {
 		this.dataFim = dataFim;
 	}
 
-	public PessoaID getDocumento() {
+	public PessoaDTO getDocumento() {
 		return documento;
 	}
 
-	public void setDocumento(PessoaID documento) {
-		this.documento = documento;
+	public void setDocumento(Pessoa documento) {
+		this.documento = documento.toDTO();
 	}
 
-	public PessoaID getTipoDocumento() {
-		return tipoDocumento;
+	public QuartoDTO getQuarto() {
+		return quarto;
 	}
 
-	public void setTipoDocumento(PessoaID tipoDocumento) {
-		this.tipoDocumento = tipoDocumento;
+	public void setQuarto(Quarto quarto) {
+		this.quarto = quarto.toDTO();
 	}
 
-	public QuartoID getQuartoID() {
-		return quartoID;
-	}
-
-	public void setQuartoID(QuartoID quartoID) {
-		this.quartoID = quartoID;
-	}
-
-	public VagaId getVagaEstacionamento() {
-		return vagaEstacionamento;
-	}
-
-	public void setVagaEstacionamento(VagaId vagaEstacionamento) {
-		this.vagaEstacionamento = vagaEstacionamento;
+	
+	@Override
+	public String toString() {
+		return "ReservaDTO [dataInicio=" + dataInicio + ", dataFim=" + dataFim + ", documento=" + documento
+				+ ", quarto=" + quarto + ", vaga=" + vaga + "]";
 	}
 
 	@Override
 	public Reserva toEntity() {
 		Reserva r = new Reserva();
-		r.setDocumento(this.documento);
-		r.setNumVaga(this.vagaEstacionamento);
-		r.setQuartoID(this.quartoID);
-		r.setTipoDocumento(this.tipoDocumento);
-		r.setVagaEstacionamento(this.vagaEstacionamento);
-		r.setNumVaga(this.vagaEstacionamento);
+		r.setId(this.id);
+		r.setCliente(this.documento.toEntity());
+		r.setVaga(this.vaga.toEntity());
+		r.setQuarto(this.quarto.toEntity());
 		r.converterDataFim(this.dataFim);
 		r.converterDataInicio(this.dataInicio);
 		r.setDataFim(this.dataFim);
