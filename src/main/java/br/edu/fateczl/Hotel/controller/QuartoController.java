@@ -30,7 +30,7 @@ public class QuartoController extends Controller<QuartoDTO>{
 	QuartoRepository rep;
 	
 	@Override
-	@GetMapping("/quartos/")
+	@GetMapping("/quartos")
 	public List<QuartoDTO> findAll() {
 		List<Quarto> quartos = rep.findAll();
 		List<QuartoDTO> qt = new ArrayList<>();

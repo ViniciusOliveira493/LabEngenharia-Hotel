@@ -91,18 +91,19 @@ BEGIN
         @data NOT BETWEEN r.datainicio and r.datafim
         AND v.tipo = @tipo
     UNION
-   SELECT TOP(20)
+    SELECT TOP(20)
         v.estacionamento
         ,v.numVaga
         ,v.descricao
         ,v.valorDiaria
         ,v.tipo
     FROM tbVaga AS v
-        INNER JOIN tbReserva AS r
-        ON 
-            (v.numVaga != r.numVaga)
-            OR
-            (v.estacionamento != r.estacionamento)
-    WHERE v.tipo = @tipo
+    WHERE 
+        (v.numVaga NOT IN (SELECT DISTINCT numVaga FROM tbReserva WHERE numVaga IS NOT NULL)
+        OR
+        v.estacionamento NOT IN (SELECT DISTINCT estacionamento FROM tbReserva WHERE estacionamento IS NOT NULL))
+        AND
+        v.tipo = @tipo
+   
     RETURN
 END
