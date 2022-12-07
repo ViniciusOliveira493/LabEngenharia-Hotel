@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Quartos</title>       
+        <title>Quartos/<title>       
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     </head>
@@ -79,22 +79,17 @@
                         </div>
                     </div>
                     <div class="col-9">
-                    <form>                        
-                        <div class="form-group mt-1">
-                            <div class="form-group">
-                                <label for="formGroupExampleInput">Tipo de Quarto</label>
-                                <input type="text" class="form-control" id="txtTipoQuarto" placeholder="Digite o tipo de quarto">
-                            </div>
-
-                            <div class="form-group">
+                    <form>                       
+                            <div class="form-group mt-1">
+                                <div class="form-group">
                                 <label for="formGroupExampleInput">Quarto</label>
                                 <input type="number" min="0" class="form-control" id="txtIdQuarto" placeholder="Digite o código do quarto">
                             </div>
 
                             <div class="mt-3">
                                 <div class="form-group">
-                                    <label for="Nome">Prédio:</label>
-                                    <input type="text" class="form-control" id="txtPredio" aria-describedby="emailHelp" placeholder="Prédio">
+                                    <label for="Nome">Prédio</label>
+                                    <input type="text" class="form-control" id="txtPredio" placeholder="Digite o nome do Prédio">
                                 </div>
                             </div>
                             <div class="input-group-append">
@@ -107,7 +102,7 @@
                             <div class="mt-3">
                                 <div class="form-group">
                                     <label for="Número do quarto">Número do quarto</label>
-                                    <input type="number" min="0" class="form-control" id="txt" placeholder="0.00">
+                                    <input type="number" min="0" class="form-control" id="txtNumQuarto" placeholder="Digite o número do quarto">
                                 </div>
                             </div>
                 
