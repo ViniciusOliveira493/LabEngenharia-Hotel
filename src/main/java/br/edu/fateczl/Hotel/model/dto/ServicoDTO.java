@@ -1,5 +1,7 @@
 package br.edu.fateczl.Hotel.model.dto;
 
+import java.util.List;
+
 import br.edu.fateczl.Hotel.model.dto.interfaces.IDTO;
 import br.edu.fateczl.Hotel.model.entity.Servico;
 
@@ -7,7 +9,7 @@ public class ServicoDTO implements IDTO<Servico>{
 	private Integer id;
 	private String nome;
 	private Double valor;
-
+	private List<ProdutoDTO> produtos;
 	
 	
 	

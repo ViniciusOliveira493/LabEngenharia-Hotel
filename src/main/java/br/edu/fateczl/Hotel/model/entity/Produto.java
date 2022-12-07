@@ -34,48 +34,55 @@ public class Produto implements IEntity<ProdutoDTO>{
 
 	@Column(name = "conteudo", nullable = false)
 	private Double conteudo;
-
+	
 	public Integer getCodigo() {
 		return codigo;
 	}
-
+	
 	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
 	}
 
+
 	public String getNome() {
 		return nome;
 	}
+
 
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
 
-
 	public UnidadeDeMedida getId() {
 		return id;
 	}
+
 
 	public void setId(UnidadeDeMedida id) {
 		this.id = id;
 	}
 
+
 	public Double getValor() {
 		return valor;
 	}
+
 
 	public void setValor(Double valor) {
 		this.valor = valor;
 	}
 
+
 	public Double getConteudo() {
 		return conteudo;
 	}
 
+
 	public void setConteudo(Double conteudo) {
 		this.conteudo = conteudo;
 	}
+
 
 	@Override
 	public ProdutoDTO toDTO() {

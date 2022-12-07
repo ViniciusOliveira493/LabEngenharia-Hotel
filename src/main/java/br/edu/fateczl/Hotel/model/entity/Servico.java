@@ -1,11 +1,18 @@
 package br.edu.fateczl.Hotel.model.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Table;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 import br.edu.fateczl.Hotel.model.dto.ServicoDTO;
 import br.edu.fateczl.Hotel.model.entity.interfaces.IEntity;
@@ -26,9 +33,7 @@ public class Servico implements IEntity<ServicoDTO> {
 	private String nome;
 
 	@Column(name = "valor", nullable = false)
-	private Double valor;
-
-	
+	private Double valor;	
 
 	public Integer getId() {
 		return id;

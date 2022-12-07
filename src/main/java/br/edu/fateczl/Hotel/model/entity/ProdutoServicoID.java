@@ -7,44 +7,38 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 public class ProdutoServicoID implements Serializable {
-	private static final long serialVersionUID = 1L;
-
+	private static final long serialVersionUID = 1L;	
+	
 	public ProdutoServicoID() {
 		// TODO Auto-generated constructor stub
 	}
 	
 	public ProdutoServicoID(Integer codigo, Integer id) {
-		this.codigo = codigo;
-		this.id = id;
+		this.codigoProduto = codigo;
+		this.idServico = id;
 	}
-	
-	
 	
 	@ManyToOne(targetEntity = Produto.class, fetch = FetchType.EAGER)
-	@JoinColumn(name = "codigo", nullable = false)
-	private Integer codigo;
-	
+	@JoinColumn(name = "codigoProduto", nullable = false)
+	private Integer codigoProduto;
 	
 	@ManyToOne(targetEntity = Servico.class, fetch = FetchType.EAGER)
-	@JoinColumn(name = "id", nullable = false)
-	private Integer id;
+	@JoinColumn(name = "idServico", nullable = false)
+	private Integer idServico;
 
-	public Integer getCodigo() {
-		return codigo;
+	public Integer getCodigoProduto() {
+		return codigoProduto;
 	}
 
-	public void setCodigo(Integer codigo) {
-		this.codigo = codigo;
+	public void setCodigoProduto(Integer codigoProduto) {
+		this.codigoProduto = codigoProduto;
 	}
 
-	public Integer getId() {
-		return id;
+	public Integer getIdServico() {
+		return idServico;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setIdServico(Integer idServico) {
+		this.idServico = idServico;
 	}
-
-	
-
 }

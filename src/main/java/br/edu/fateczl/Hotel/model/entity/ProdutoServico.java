@@ -37,8 +37,9 @@ public class ProdutoServico implements IEntity<ProdutoServicoDTO> {
 	@Override
 	public ProdutoServicoDTO toDTO() {
 		ProdutoServicoDTO dto = new ProdutoServicoDTO();
-		dto.setPid(this.id.getCodigo());
-		dto.setSid(this.id.getId());
+		dto.setProdutoId(this.id.getCodigoProduto());
+		dto.setServicoId(this.id.getIdServico());
+		dto.setQtd(this.qtd);
 		return dto;
 	}
 
