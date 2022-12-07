@@ -50,10 +50,10 @@ BEGIN
     FROM tbQuarto AS q, tbReserva AS r
     WHERE 
         q.id = r.quartoId AND q.tipo = @tipo
-        AND 
-        @data != r.datainicio
         AND
         @data NOT BETWEEN r.datainicio and r.datafim
+        AND 
+        @data != r.datainicio
     UNION
     SELECT TOP(20)
         q.id
@@ -61,12 +61,15 @@ BEGIN
         ,q.numero
         ,q.predio
         ,q.tipo
-    FROM tbQuarto AS q, tbReserva AS r
+    FROM tbQuarto AS q
     WHERE 
-        q.id != r.quartoId AND q.tipo = @tipo
+        q.tipo = @tipo
+        AND
+        q.id NOT IN
+        (SELECT DISTINCT quartoId from tbReserva)
     RETURN
 END
-GO
+Go
 --=================== FN Vagas ==--
 CREATE FUNCTION fn_buscarVagasDisponiveis(@data DATETIME,@tipo INT)
 RETURNS @tab Table(estacionamento VARCHAR(15),numVaga INT,descricao VARCHAR(255),valorDiaria FLOAT,tipo INT)
@@ -88,15 +91,18 @@ BEGIN
         @data NOT BETWEEN r.datainicio and r.datafim
         AND v.tipo = @tipo
     UNION
-    SELECT TOP(20)
+   SELECT TOP(20)
         v.estacionamento
         ,v.numVaga
         ,v.descricao
         ,v.valorDiaria
         ,v.tipo
-    FROM tbVaga AS v,tbReserva as r 
-    WHERE 
-    v.numVaga != r.numVaga
-        AND v.tipo = @tipo
+    FROM tbVaga AS v
+        INNER JOIN tbReserva AS r
+        ON 
+            (v.numVaga != r.numVaga)
+            OR
+            (v.estacionamento != r.estacionamento)
+    WHERE v.tipo = @tipo
     RETURN
 END

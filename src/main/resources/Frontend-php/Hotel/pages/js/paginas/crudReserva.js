@@ -91,12 +91,20 @@ getElementById("btnCadReserva").addEventListener("click",function(){
 	})
 	.done(function(msg){
         alert(msg)	
+        limparForm();
 	})
 	.fail(function(jqXHR, textStatus, msg){
 		console.log(msg);
 	});
 });
-
+function limparForm(){
+    getElementById('selectTipoDocumentoForm').value = 0;
+    getElementById('txtDocumentoClienteForm').value = "";
+    getElementById('dataInicioReserva').value = "";
+    getElementById('dataFimReserva').value = "";
+    getElementById('slTipoQuarto').value = 0;
+    getElementById('selectQuarto').value = 0;
+}
 getElementById("txtDocumentoClienteForm").addEventListener("focusout",function(){
     var documento = getValueById('txtDocumentoClienteForm');
     var tipoDocumento = getValueById('selectTipoDocumentoForm');
